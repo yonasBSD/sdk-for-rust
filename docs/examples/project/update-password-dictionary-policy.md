@@ -11,8 +11,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let project = Project::new(&client);
 
-    let result = project.update_service_status(
-        appwrite::enums::ServiceId::Account,
+    let result = project.update_password_dictionary_policy(
         false
     ).await?;
 

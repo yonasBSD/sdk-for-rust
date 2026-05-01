@@ -97,6 +97,12 @@ pub struct Project {
     /// Whether or not to show user MFA status in the teams membership response.
     #[serde(rename = "authMembershipsMfa")]
     pub auth_memberships_mfa: bool,
+    /// Whether or not to show user IDs in the teams membership response.
+    #[serde(rename = "authMembershipsUserId")]
+    pub auth_memberships_user_id: bool,
+    /// Whether or not to show user phone numbers in the teams membership response.
+    #[serde(rename = "authMembershipsUserPhone")]
+    pub auth_memberships_user_phone: bool,
     /// Whether or not all existing sessions should be invalidated on password
     /// change
     #[serde(rename = "authInvalidateSessions")]
@@ -125,9 +131,12 @@ pub struct Project {
     /// SMTP sender email
     #[serde(rename = "smtpSenderEmail")]
     pub smtp_sender_email: String,
+    /// SMTP reply to name
+    #[serde(rename = "smtpReplyToName")]
+    pub smtp_reply_to_name: String,
     /// SMTP reply to email
-    #[serde(rename = "smtpReplyTo")]
-    pub smtp_reply_to: String,
+    #[serde(rename = "smtpReplyToEmail")]
+    pub smtp_reply_to_email: String,
     /// SMTP server host name
     #[serde(rename = "smtpHost")]
     pub smtp_host: String,
@@ -137,7 +146,8 @@ pub struct Project {
     /// SMTP server username
     #[serde(rename = "smtpUsername")]
     pub smtp_username: String,
-    /// SMTP server password
+    /// SMTP server password. This property is write-only and always returned
+    /// empty.
     #[serde(rename = "smtpPassword")]
     pub smtp_password: String,
     /// SMTP server secure protocol
@@ -392,6 +402,16 @@ impl Project {
         &self.auth_memberships_mfa
     }
 
+    /// Get auth_memberships_user_id
+    pub fn auth_memberships_user_id(&self) -> &bool {
+        &self.auth_memberships_user_id
+    }
+
+    /// Get auth_memberships_user_phone
+    pub fn auth_memberships_user_phone(&self) -> &bool {
+        &self.auth_memberships_user_phone
+    }
+
     /// Get auth_invalidate_sessions
     pub fn auth_invalidate_sessions(&self) -> &bool {
         &self.auth_invalidate_sessions
@@ -437,9 +457,14 @@ impl Project {
         &self.smtp_sender_email
     }
 
-    /// Get smtp_reply_to
-    pub fn smtp_reply_to(&self) -> &String {
-        &self.smtp_reply_to
+    /// Get smtp_reply_to_name
+    pub fn smtp_reply_to_name(&self) -> &String {
+        &self.smtp_reply_to_name
+    }
+
+    /// Get smtp_reply_to_email
+    pub fn smtp_reply_to_email(&self) -> &String {
+        &self.smtp_reply_to_email
     }
 
     /// Get smtp_host
@@ -679,6 +704,8 @@ mod tests {
         let _ = _model.auth_memberships_user_name();
         let _ = _model.auth_memberships_user_email();
         let _ = _model.auth_memberships_mfa();
+        let _ = _model.auth_memberships_user_id();
+        let _ = _model.auth_memberships_user_phone();
         let _ = _model.auth_invalidate_sessions();
         let _ = _model.o_auth_providers();
         let _ = _model.platforms();
@@ -688,7 +715,8 @@ mod tests {
         let _ = _model.smtp_enabled();
         let _ = _model.smtp_sender_name();
         let _ = _model.smtp_sender_email();
-        let _ = _model.smtp_reply_to();
+        let _ = _model.smtp_reply_to_name();
+        let _ = _model.smtp_reply_to_email();
         let _ = _model.smtp_host();
         let _ = _model.smtp_port();
         let _ = _model.smtp_username();

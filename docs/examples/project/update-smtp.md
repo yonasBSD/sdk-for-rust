@@ -11,9 +11,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let project = Project::new(&client);
 
-    let result = project.update_protocol_status(
-        appwrite::enums::ProtocolId::Rest,
-        false
+    let result = project.update_smtp(
+        Some(""), // optional
+        Some(0), // optional
+        Some("<USERNAME>"), // optional
+        Some("<PASSWORD>"), // optional
+        Some("email@example.com"), // optional
+        Some("<SENDER_NAME>"), // optional
+        Some("email@example.com"), // optional
+        Some("<REPLY_TO_NAME>"), // optional
+        Some(appwrite::enums::Secure::Tls), // optional
+        Some(false) // optional
     ).await?;
 
     let _ = result;
