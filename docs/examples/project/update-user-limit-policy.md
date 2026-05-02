@@ -11,9 +11,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let project = Project::new(&client);
 
-    let result = project.update_protocol_status(
-        appwrite::enums::ProtocolId::Rest,
-        false
+    let result = project.update_user_limit_policy(
+        Some(1)
     ).await?;
 
     let _ = result;

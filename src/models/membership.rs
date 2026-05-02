@@ -26,6 +26,10 @@ pub struct Membership {
     /// the Console.
     #[serde(rename = "userEmail")]
     pub user_email: String,
+    /// User phone number. Hide this attribute by toggling membership privacy in
+    /// the Console.
+    #[serde(rename = "userPhone")]
+    pub user_phone: String,
     /// Team ID.
     #[serde(rename = "teamId")]
     pub team_id: String,
@@ -84,6 +88,11 @@ impl Membership {
         &self.user_email
     }
 
+    /// Get user_phone
+    pub fn user_phone(&self) -> &String {
+        &self.user_phone
+    }
+
     /// Get team_id
     pub fn team_id(&self) -> &String {
         &self.team_id
@@ -134,6 +143,7 @@ mod tests {
         let _ = _model.user_id();
         let _ = _model.user_name();
         let _ = _model.user_email();
+        let _ = _model.user_phone();
         let _ = _model.team_id();
         let _ = _model.team_name();
         let _ = _model.invited();

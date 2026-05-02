@@ -379,9 +379,193 @@ impl Project {
         self.client.call(Method::DELETE, &path, Some(api_headers), Some(params)).await
     }
 
-    /// Update the status of a specific protocol. Use this endpoint to enable or
+    /// Updating this policy allows you to control if team members can see other
+    /// members information. When enabled, all team members can see ID, name,
+    /// email, phone number, and MFA status of other members..
+    pub async fn update_membership_privacy_policy(
+        &self,
+        user_id: Option<bool>,
+        user_email: Option<bool>,
+        user_phone: Option<bool>,
+        user_name: Option<bool>,
+        user_mfa: Option<bool>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        if let Some(value) = user_id {
+            params.insert("userId".to_string(), json!(value));
+        }
+        if let Some(value) = user_email {
+            params.insert("userEmail".to_string(), json!(value));
+        }
+        if let Some(value) = user_phone {
+            params.insert("userPhone".to_string(), json!(value));
+        }
+        if let Some(value) = user_name {
+            params.insert("userName".to_string(), json!(value));
+        }
+        if let Some(value) = user_mfa {
+            params.insert("userMFA".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/membership-privacy".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Updating this policy allows you to control if new passwords are checked
+    /// against most common passwords dictionary. When enabled, and user changes
+    /// their password, password must not be contained in the dictionary.
+    pub async fn update_password_dictionary_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/password-dictionary".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Updates one of password strength policies. Based on total length
+    /// configured, previous password hashes are stored, and users cannot choose a
+    /// new password that is already stored in the passwird history list, when
+    /// updating an user password, or setting new one through password recovery.
+    /// 
+    /// Keep in mind, while password history policy is disabled, the history is not
+    /// being stored. Enabling the policy will not have any history on existing
+    /// users, and it will only start to collect and enforce the policy on password
+    /// changes since the policy is enabled.
+    pub async fn update_password_history_policy(
+        &self,
+        total: Option<i64>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        if let Some(value) = total {
+            params.insert("total".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/password-history".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Updating this policy allows you to control if password strength is checked
+    /// against personal data. When enabled, and user sets or changes their
+    /// password, the password must not contain user ID, name, email or phone
+    /// number.
+    pub async fn update_password_personal_data_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/password-personal-data".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Updating this policy allows you to control if email alert is sent upon
+    /// session creation. When enabled, and user signs into their account, they
+    /// will be sent an email notification. There is an exception, the first
+    /// session after a new sign up does not trigger an alert, even if the policy
+    /// is enabled.
+    pub async fn update_session_alert_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/session-alert".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update maximum duration how long sessions created within a project should
+    /// stay active for.
+    pub async fn update_session_duration_policy(
+        &self,
+        duration: i64,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("duration".to_string(), json!(duration));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/session-duration".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Updating this policy allows you to control if existing sessions should be
+    /// invalidated when a password of a user is changed. When enabled, and user
+    /// changes their password, they will be logged out of all their devices.
+    pub async fn update_session_invalidation_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/session-invalidation".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update the maximum number of sessions allowed per user. When the limit is
+    /// hit, the oldest session will be deleted to make room for new one.
+    pub async fn update_session_limit_policy(
+        &self,
+        total: Option<i64>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        if let Some(value) = total {
+            params.insert("total".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/session-limit".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update the maximum number of users in the project. When the limit is hit or
+    /// amount of existing users already exceeded the limit, all users remain
+    /// active, but new user sign up will be prohibited.
+    pub async fn update_user_limit_policy(
+        &self,
+        total: Option<i64>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        if let Some(value) = total {
+            params.insert("total".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/user-limit".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update properties of a specific protocol. Use this endpoint to enable or
     /// disable a protocol in your project.
-    pub async fn update_protocol_status(
+    pub async fn update_protocol(
         &self,
         protocol_id: crate::enums::ProtocolId,
         enabled: bool,
@@ -391,14 +575,14 @@ impl Project {
         let mut api_headers = HashMap::new();
         api_headers.insert("content-type".to_string(), "application/json".to_string());
 
-        let path = "/project/protocols/{protocolId}/status".to_string().replace("{protocolId}", &protocol_id.to_string());
+        let path = "/project/protocols/{protocolId}".to_string().replace("{protocolId}", &protocol_id.to_string());
 
         self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
     }
 
-    /// Update the status of a specific service. Use this endpoint to enable or
+    /// Update properties of a specific service. Use this endpoint to enable or
     /// disable a service in your project.
-    pub async fn update_service_status(
+    pub async fn update_service(
         &self,
         service_id: crate::enums::ServiceId,
         enabled: bool,
@@ -408,9 +592,143 @@ impl Project {
         let mut api_headers = HashMap::new();
         api_headers.insert("content-type".to_string(), "application/json".to_string());
 
-        let path = "/project/services/{serviceId}/status".to_string().replace("{serviceId}", &service_id.to_string());
+        let path = "/project/services/{serviceId}".to_string().replace("{serviceId}", &service_id.to_string());
 
         self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update the SMTP configuration for your project. Use this endpoint to
+    /// configure your project's SMTP provider with your custom settings for
+    /// sending transactional emails.
+    #[allow(clippy::too_many_arguments)]
+    pub async fn update_smtp(
+        &self,
+        host: Option<&str>,
+        port: Option<i64>,
+        username: Option<&str>,
+        password: Option<&str>,
+        sender_email: Option<&str>,
+        sender_name: Option<&str>,
+        reply_to_email: Option<&str>,
+        reply_to_name: Option<&str>,
+        secure: Option<crate::enums::Secure>,
+        enabled: Option<bool>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        if let Some(value) = host {
+            params.insert("host".to_string(), json!(value));
+        }
+        if let Some(value) = port {
+            params.insert("port".to_string(), json!(value));
+        }
+        if let Some(value) = username {
+            params.insert("username".to_string(), json!(value));
+        }
+        if let Some(value) = password {
+            params.insert("password".to_string(), json!(value));
+        }
+        if let Some(value) = sender_email {
+            params.insert("senderEmail".to_string(), json!(value));
+        }
+        if let Some(value) = sender_name {
+            params.insert("senderName".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_email {
+            params.insert("replyToEmail".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_name {
+            params.insert("replyToName".to_string(), json!(value));
+        }
+        if let Some(value) = secure {
+            params.insert("secure".to_string(), json!(value));
+        }
+        if let Some(value) = enabled {
+            params.insert("enabled".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/smtp".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Send a test email to verify SMTP configuration.
+    pub async fn create_smtp_test(
+        &self,
+        emails: impl IntoIterator<Item = impl Into<String>>,
+    ) -> crate::error::Result<()> {
+        let mut params = HashMap::new();
+        params.insert("emails".to_string(), json!(emails.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/smtp/tests".to_string();
+
+        self.client.call(Method::POST, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update a custom email template for the specified locale and type. Use this
+    /// endpoint to modify the content of your email templates.
+    #[allow(clippy::too_many_arguments)]
+    pub async fn update_email_template(
+        &self,
+        template_id: crate::enums::EmailTemplateType,
+        locale: Option<crate::enums::EmailTemplateLocale>,
+        subject: Option<&str>,
+        message: Option<&str>,
+        sender_name: Option<&str>,
+        sender_email: Option<&str>,
+        reply_to_email: Option<&str>,
+        reply_to_name: Option<&str>,
+    ) -> crate::error::Result<crate::models::EmailTemplate> {
+        let mut params = HashMap::new();
+        params.insert("templateId".to_string(), json!(template_id));
+        if let Some(value) = locale {
+            params.insert("locale".to_string(), json!(value));
+        }
+        if let Some(value) = subject {
+            params.insert("subject".to_string(), json!(value));
+        }
+        if let Some(value) = message {
+            params.insert("message".to_string(), json!(value));
+        }
+        if let Some(value) = sender_name {
+            params.insert("senderName".to_string(), json!(value));
+        }
+        if let Some(value) = sender_email {
+            params.insert("senderEmail".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_email {
+            params.insert("replyToEmail".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_name {
+            params.insert("replyToName".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/templates/email".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Get a custom email template for the specified locale and type. This
+    /// endpoint returns the template content, subject, and other configuration
+    /// details.
+    pub async fn get_email_template(
+        &self,
+        template_id: crate::enums::EmailTemplateType,
+        locale: Option<crate::enums::EmailTemplateLocale>,
+    ) -> crate::error::Result<crate::models::EmailTemplate> {
+        let mut params = HashMap::new();
+        if let Some(value) = locale {
+            params.insert("locale".to_string(), json!(value));
+        }
+
+        let path = "/project/templates/email/{templateId}".to_string().replace("{templateId}", &template_id.to_string());
+
+        self.client.call(Method::GET, &path, None, Some(params)).await
     }
 
     /// Get a list of all project environment variables.

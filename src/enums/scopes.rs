@@ -135,6 +135,10 @@ pub enum Scopes {
     PlatformsWrite,
     #[serde(rename = "policies.write")]
     PoliciesWrite,
+    #[serde(rename = "templates.read")]
+    TemplatesRead,
+    #[serde(rename = "templates.write")]
+    TemplatesWrite,
     #[serde(rename = "policies.read")]
     PoliciesRead,
     #[serde(rename = "archives.read")]
@@ -223,6 +227,8 @@ impl Scopes {
             Scopes::PlatformsRead => "platforms.read",
             Scopes::PlatformsWrite => "platforms.write",
             Scopes::PoliciesWrite => "policies.write",
+            Scopes::TemplatesRead => "templates.read",
+            Scopes::TemplatesWrite => "templates.write",
             Scopes::PoliciesRead => "policies.read",
             Scopes::ArchivesRead => "archives.read",
             Scopes::ArchivesWrite => "archives.write",

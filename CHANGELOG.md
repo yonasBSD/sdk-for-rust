@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0] - TBD
+## [0.4.0] - TBD
 
 ### Added
 - Initial release of Appwrite Rust SDK
-- Full support for Appwrite API 1.9.1
+- Full support for Appwrite API 1.9.2
 - Async/await support with tokio runtime
 - Built-in error handling with custom error types
 - File upload support with automatic chunking
@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Health service with 24 methods
 - Locale service with 8 methods
 - Messaging service with 56 methods
-- Project service with 26 methods
+- Project service with 39 methods
 - Sites service with 25 methods
 - Storage service with 13 methods
 - TablesDB service with 69 methods
@@ -453,8 +453,23 @@ The Project service allows you to manage all the projects in your Appwrite serve
 - `update_windows_platform()` - Update a Windows platform by its unique ID. Use this endpoint to update the platform&#039;s name or package identifier name.
 - `get_platform()` - Get a platform by its unique ID. This endpoint returns the platform&#039;s details, including its name, type, and key configurations.
 - `delete_platform()` - Delete a platform by its unique ID. This endpoint removes the platform and all its configurations from the project.
-- `update_protocol_status()` - Update the status of a specific protocol. Use this endpoint to enable or disable a protocol in your project. 
-- `update_service_status()` - Update the status of a specific service. Use this endpoint to enable or disable a service in your project. 
+- `update_membership_privacy_policy()` - Updating this policy allows you to control if team members can see other members information. When enabled, all team members can see ID, name, email, phone number, and MFA status of other members..
+- `update_password_dictionary_policy()` - Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
+- `update_password_history_policy()` - Updates one of password strength policies. Based on total length configured, previous password hashes are stored, and users cannot choose a new password that is already stored in the passwird history list, when updating an user password, or setting new one through password recovery.
+
+Keep in mind, while password history policy is disabled, the history is not being stored. Enabling the policy will not have any history on existing users, and it will only start to collect and enforce the policy on password changes since the policy is enabled.
+- `update_password_personal_data_policy()` - Updating this policy allows you to control if password strength is checked against personal data. When enabled, and user sets or changes their password, the password must not contain user ID, name, email or phone number.
+- `update_session_alert_policy()` - Updating this policy allows you to control if email alert is sent upon session creation. When enabled, and user signs into their account, they will be sent an email notification. There is an exception, the first session after a new sign up does not trigger an alert, even if the policy is enabled.
+- `update_session_duration_policy()` - Update maximum duration how long sessions created within a project should stay active for.
+- `update_session_invalidation_policy()` - Updating this policy allows you to control if existing sessions should be invalidated when a password of a user is changed. When enabled, and user changes their password, they will be logged out of all their devices.
+- `update_session_limit_policy()` - Update the maximum number of sessions allowed per user. When the limit is hit, the oldest session will be deleted to make room for new one.
+- `update_user_limit_policy()` - Update the maximum number of users in the project. When the limit is hit or amount of existing users already exceeded the limit, all users remain active, but new user sign up will be prohibited.
+- `update_protocol()` - Update properties of a specific protocol. Use this endpoint to enable or disable a protocol in your project. 
+- `update_service()` - Update properties of a specific service. Use this endpoint to enable or disable a service in your project. 
+- `update_smtp()` - Update the SMTP configuration for your project. Use this endpoint to configure your project&#039;s SMTP provider with your custom settings for sending transactional emails.
+- `create_smtp_test()` - Send a test email to verify SMTP configuration. 
+- `update_email_template()` - Update a custom email template for the specified locale and type. Use this endpoint to modify the content of your email templates.
+- `get_email_template()` - Get a custom email template for the specified locale and type. This endpoint returns the template content, subject, and other configuration details.
 - `list_variables()` - Get a list of all project environment variables.
 - `create_variable()` - Create a new project environment variable. These variables can be accessed by all functions and sites in the project.
 - `get_variable()` - Get a variable by its unique ID. 
@@ -854,6 +869,7 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `HealthTime` - Health Time
 - `Headers` - Headers
 - `Specification` - Specification
+- `EmailTemplate` - EmailTemplate
 - `MfaChallenge` - MFA Challenge
 - `MfaRecoveryCodes` - MFA Recovery Codes
 - `MfaType` - MFAType
@@ -889,4 +905,4 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - File upload examples
 - Query builder documentation
 
-[0.3.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.3.0
+[0.4.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.4.0

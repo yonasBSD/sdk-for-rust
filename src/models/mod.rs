@@ -270,6 +270,8 @@ pub mod headers;
 pub use headers::Headers;
 pub mod specification;
 pub use specification::Specification;
+pub mod email_template;
+pub use email_template::EmailTemplate;
 pub mod mfa_challenge;
 pub use mfa_challenge::MfaChallenge;
 pub mod mfa_recovery_codes;
@@ -453,6 +455,7 @@ impl Model for HealthCertificate {}
 impl Model for HealthTime {}
 impl Model for Headers {}
 impl Model for Specification {}
+impl Model for EmailTemplate {}
 impl Model for MfaChallenge {}
 impl Model for MfaRecoveryCodes {}
 impl Model for MfaType {}
