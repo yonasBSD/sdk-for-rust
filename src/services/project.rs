@@ -1869,7 +1869,7 @@ impl Project {
     /// configuration for the requested project policy.
     pub async fn get_policy(
         &self,
-        policy_id: crate::enums::ProjectPolicyId,
+        policy_id: crate::enums::ProjectPolicy,
     ) -> crate::error::Result<serde_json::Value> {
         let params = HashMap::new();
 
