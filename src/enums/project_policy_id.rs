@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum PolicyId {
+pub enum ProjectPolicyId {
     #[serde(rename = "password-dictionary")]
     #[default]
     PasswordDictionary,
@@ -23,24 +23,24 @@ pub enum PolicyId {
     MembershipPrivacy,
 }
 
-impl PolicyId {
+impl ProjectPolicyId {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            PolicyId::PasswordDictionary => "password-dictionary",
-            PolicyId::PasswordHistory => "password-history",
-            PolicyId::PasswordPersonalData => "password-personal-data",
-            PolicyId::SessionAlert => "session-alert",
-            PolicyId::SessionDuration => "session-duration",
-            PolicyId::SessionInvalidation => "session-invalidation",
-            PolicyId::SessionLimit => "session-limit",
-            PolicyId::UserLimit => "user-limit",
-            PolicyId::MembershipPrivacy => "membership-privacy",
+            ProjectPolicyId::PasswordDictionary => "password-dictionary",
+            ProjectPolicyId::PasswordHistory => "password-history",
+            ProjectPolicyId::PasswordPersonalData => "password-personal-data",
+            ProjectPolicyId::SessionAlert => "session-alert",
+            ProjectPolicyId::SessionDuration => "session-duration",
+            ProjectPolicyId::SessionInvalidation => "session-invalidation",
+            ProjectPolicyId::SessionLimit => "session-limit",
+            ProjectPolicyId::UserLimit => "user-limit",
+            ProjectPolicyId::MembershipPrivacy => "membership-privacy",
         }
     }
 }
 
-impl std::fmt::Display for PolicyId {
+impl std::fmt::Display for ProjectPolicyId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }
