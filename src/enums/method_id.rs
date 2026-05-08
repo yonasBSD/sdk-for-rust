@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum AuthMethod {
+pub enum MethodId {
     #[serde(rename = "email-password")]
     #[default]
     EmailPassword,
@@ -19,22 +19,22 @@ pub enum AuthMethod {
     Phone,
 }
 
-impl AuthMethod {
+impl MethodId {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            AuthMethod::EmailPassword => "email-password",
-            AuthMethod::MagicUrl => "magic-url",
-            AuthMethod::EmailOtp => "email-otp",
-            AuthMethod::Anonymous => "anonymous",
-            AuthMethod::Invites => "invites",
-            AuthMethod::Jwt => "jwt",
-            AuthMethod::Phone => "phone",
+            MethodId::EmailPassword => "email-password",
+            MethodId::MagicUrl => "magic-url",
+            MethodId::EmailOtp => "email-otp",
+            MethodId::Anonymous => "anonymous",
+            MethodId::Invites => "invites",
+            MethodId::Jwt => "jwt",
+            MethodId::Phone => "phone",
         }
     }
 }
 
-impl std::fmt::Display for AuthMethod {
+impl std::fmt::Display for MethodId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }

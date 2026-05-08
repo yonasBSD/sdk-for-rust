@@ -4,6 +4,8 @@ pub mod row_list;
 pub use row_list::RowList;
 pub mod document_list;
 pub use document_list::DocumentList;
+pub mod presence_list;
+pub use presence_list::PresenceList;
 pub mod table_list;
 pub use table_list::TableList;
 pub mod collection_list;
@@ -176,6 +178,8 @@ pub mod row;
 pub use row::Row;
 pub mod document;
 pub use document::Document;
+pub mod presence;
+pub use presence::Presence;
 pub mod log;
 pub use log::Log;
 pub mod user;
@@ -438,6 +442,7 @@ pub trait Model: Serialize + for<'de> Deserialize<'de> + Clone + std::fmt::Debug
 // Implement the trait for all generated models
 impl Model for RowList {}
 impl Model for DocumentList {}
+impl Model for PresenceList {}
 impl Model for TableList {}
 impl Model for CollectionList {}
 impl Model for DatabaseList {}
@@ -524,6 +529,7 @@ impl Model for Index {}
 impl Model for ColumnIndex {}
 impl Model for Row {}
 impl Model for Document {}
+impl Model for Presence {}
 impl Model for Log {}
 impl Model for User {}
 impl Model for AlgoMd5 {}

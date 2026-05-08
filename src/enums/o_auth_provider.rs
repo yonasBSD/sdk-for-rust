@@ -89,10 +89,6 @@ pub enum OAuthProvider {
     Zoho,
     #[serde(rename = "zoom")]
     Zoom,
-    #[serde(rename = "githubImagine")]
-    GithubImagine,
-    #[serde(rename = "googleImagine")]
-    GoogleImagine,
 }
 
 impl OAuthProvider {
@@ -142,8 +138,6 @@ impl OAuthProvider {
             OAuthProvider::Yandex => "yandex",
             OAuthProvider::Zoho => "zoho",
             OAuthProvider::Zoom => "zoom",
-            OAuthProvider::GithubImagine => "githubImagine",
-            OAuthProvider::GoogleImagine => "googleImagine",
         }
     }
 }
