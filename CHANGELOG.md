@@ -32,7 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Health service with 24 methods
 - Locale service with 8 methods
 - Messaging service with 56 methods
-- Presences service with 5 methods
 - Project service with 94 methods
 - Proxy service with 8 methods
 - Sites service with 25 methods
@@ -438,14 +437,6 @@ The Messaging service allows you to send messages to any provider type (SMTP, pu
 
 - `delete_subscriber()` - Delete a subscriber by its unique ID.
 
-#### Presences
-
-- `list()` - List presence logs.
-- `get()` - Get a presence log by its unique ID.
-- `upsert()` - Create or update a presence log by its unique ID.
-- `update_presence()` - Update a presence log by its unique ID.
-- `delete()` - Delete a presence log by its unique ID.
-
 #### Project
 The Project service allows you to manage all the projects in your Appwrite server.
 - `delete()` - Delete a project.
@@ -832,7 +823,6 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 ### Models
 - `RowList` - Rows List
 - `DocumentList` - Documents List
-- `PresenceList` - Presences List
 - `TableList` - Tables List
 - `CollectionList` - Collections List
 - `DatabaseList` - Databases List
@@ -919,7 +909,6 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `ColumnIndex` - Index
 - `Row` - Row
 - `Document` - Document
-- `Presence` - Presence
 - `Log` - Log
 - `User` - User
 - `AlgoMd5` - AlgoMD5
