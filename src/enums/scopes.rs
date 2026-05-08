@@ -159,10 +159,6 @@ pub enum Scopes {
     VcsRead,
     #[serde(rename = "vcs.write")]
     VcsWrite,
-    #[serde(rename = "presences.read")]
-    PresencesRead,
-    #[serde(rename = "presences.write")]
-    PresencesWrite,
     #[serde(rename = "backups.policies.read")]
     BackupsPoliciesRead,
     #[serde(rename = "backups.policies.write")]
@@ -265,8 +261,6 @@ impl Scopes {
             Scopes::SchedulesWrite => "schedules.write",
             Scopes::VcsRead => "vcs.read",
             Scopes::VcsWrite => "vcs.write",
-            Scopes::PresencesRead => "presences.read",
-            Scopes::PresencesWrite => "presences.write",
             Scopes::BackupsPoliciesRead => "backups.policies.read",
             Scopes::BackupsPoliciesWrite => "backups.policies.write",
             Scopes::ArchivesRead => "archives.read",

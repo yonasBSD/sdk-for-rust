@@ -458,7 +458,6 @@ You can also create a standard API key if you need a longer-lived key instead.
 - `update_mock_phone()` - Update a mock phone by its unique number. Use this endpoint to update the mock phone&#039;s OTP.
 - `delete_mock_phone()` - Delete a mock phone by its unique number. This endpoint removes the mock phone and its OTP configuration from the project.
 - `list_o_auth2_providers()` - Get a list of all OAuth2 providers supported by the server, along with the project&#039;s configuration for each. Credential fields are write-only and always returned empty.
-- `get_o_auth2_provider()` - Get a single OAuth2 provider configuration. Credential fields (client secret, p8 file, key/team IDs) are write-only and always returned empty.
 - `update_o_auth2_amazon()` - Update the project OAuth2 Amazon configuration.
 - `update_o_auth2_apple()` - Update the project OAuth2 Apple configuration.
 - `update_o_auth2_auth0()` - Update the project OAuth2 Auth0 configuration.
@@ -501,6 +500,7 @@ You can also create a standard API key if you need a longer-lived key instead.
 - `update_o_auth2_yandex()` - Update the project OAuth2 Yandex configuration.
 - `update_o_auth2_zoho()` - Update the project OAuth2 Zoho configuration.
 - `update_o_auth2_zoom()` - Update the project OAuth2 Zoom configuration.
+- `get_o_auth2_provider()` - Get a single OAuth2 provider configuration. Credential fields (client secret, p8 file, key/team IDs) are write-only and always returned empty.
 - `list_platforms()` - Get a list of all platforms in the project. This endpoint returns an array of all platforms and their configurations.
 - `create_android_platform()` - Create a new Android platform for your project. Use this endpoint to register a new Android platform where your users will run your application which will interact with the Appwrite API.
 - `update_android_platform()` - Update an Android platform by its unique ID. Use this endpoint to update the platform&#039;s name or application ID.

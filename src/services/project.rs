@@ -39,7 +39,7 @@ impl Project {
     /// disable a method in your project.
     pub async fn update_auth_method(
         &self,
-        method_id: crate::enums::MethodId,
+        method_id: crate::enums::AuthMethod,
         enabled: bool,
     ) -> crate::error::Result<crate::models::Project> {
         let mut params = HashMap::new();
@@ -285,20 +285,6 @@ impl Project {
         }
 
         let path = "/project/oauth2".to_string();
-
-        self.client.call(Method::GET, &path, None, Some(params)).await
-    }
-
-    /// Get a single OAuth2 provider configuration. Credential fields (client
-    /// secret, p8 file, key/team IDs) are write-only and always returned empty.
-    pub async fn get_o_auth2_provider(
-        &self,
-        provider_id: crate::enums::ProviderId,
-    ) -> crate::error::Result<serde_json::Value> {
-        let mut params = HashMap::new();
-        params.insert("providerId".to_string(), json!(provider_id));
-
-        let path = "/project/oauth2/:provider".to_string();
 
         self.client.call(Method::GET, &path, None, Some(params)).await
     }
@@ -1414,6 +1400,19 @@ impl Project {
         self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
     }
 
+    /// Get a single OAuth2 provider configuration. Credential fields (client
+    /// secret, p8 file, key/team IDs) are write-only and always returned empty.
+    pub async fn get_o_auth2_provider(
+        &self,
+        provider_id: crate::enums::OAuthProvider,
+    ) -> crate::error::Result<serde_json::Value> {
+        let params = HashMap::new();
+
+        let path = "/project/oauth2/{providerId}".to_string().replace("{providerId}", &provider_id.to_string());
+
+        self.client.call(Method::GET, &path, None, Some(params)).await
+    }
+
     /// Get a list of all platforms in the project. This endpoint returns an array
     /// of all platforms and their configurations.
     pub async fn list_platforms(
@@ -1869,7 +1868,7 @@ impl Project {
     /// configuration for the requested project policy.
     pub async fn get_policy(
         &self,
-        policy_id: crate::enums::PolicyId,
+        policy_id: crate::enums::ProjectPolicy,
     ) -> crate::error::Result<serde_json::Value> {
         let params = HashMap::new();
 
