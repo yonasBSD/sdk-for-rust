@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum ServiceId {
+pub enum ProjectServiceId {
     #[serde(rename = "account")]
     #[default]
     Account,
@@ -37,34 +37,37 @@ pub enum ServiceId {
     Migrations,
     #[serde(rename = "messaging")]
     Messaging,
+    #[serde(rename = "advisor")]
+    Advisor,
 }
 
-impl ServiceId {
+impl ProjectServiceId {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            ServiceId::Account => "account",
-            ServiceId::Avatars => "avatars",
-            ServiceId::Databases => "databases",
-            ServiceId::Tablesdb => "tablesdb",
-            ServiceId::Locale => "locale",
-            ServiceId::Health => "health",
-            ServiceId::Project => "project",
-            ServiceId::Storage => "storage",
-            ServiceId::Teams => "teams",
-            ServiceId::Users => "users",
-            ServiceId::Vcs => "vcs",
-            ServiceId::Sites => "sites",
-            ServiceId::Functions => "functions",
-            ServiceId::Proxy => "proxy",
-            ServiceId::Graphql => "graphql",
-            ServiceId::Migrations => "migrations",
-            ServiceId::Messaging => "messaging",
+            ProjectServiceId::Account => "account",
+            ProjectServiceId::Avatars => "avatars",
+            ProjectServiceId::Databases => "databases",
+            ProjectServiceId::Tablesdb => "tablesdb",
+            ProjectServiceId::Locale => "locale",
+            ProjectServiceId::Health => "health",
+            ProjectServiceId::Project => "project",
+            ProjectServiceId::Storage => "storage",
+            ProjectServiceId::Teams => "teams",
+            ProjectServiceId::Users => "users",
+            ProjectServiceId::Vcs => "vcs",
+            ProjectServiceId::Sites => "sites",
+            ProjectServiceId::Functions => "functions",
+            ProjectServiceId::Proxy => "proxy",
+            ProjectServiceId::Graphql => "graphql",
+            ProjectServiceId::Migrations => "migrations",
+            ProjectServiceId::Messaging => "messaging",
+            ProjectServiceId::Advisor => "advisor",
         }
     }
 }
 
-impl std::fmt::Display for ServiceId {
+impl std::fmt::Display for ProjectServiceId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }

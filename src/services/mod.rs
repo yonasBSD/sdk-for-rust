@@ -20,10 +20,14 @@ pub mod locale;
 pub use locale::Locale;
 pub mod messaging;
 pub use messaging::Messaging;
+pub mod presences;
+pub use presences::Presences;
 pub mod project;
 pub use project::Project;
 pub mod proxy;
 pub use proxy::Proxy;
+pub mod advisor;
+pub use advisor::Advisor;
 pub mod sites;
 pub use sites::Sites;
 pub mod storage;
@@ -34,6 +38,8 @@ pub mod teams;
 pub use teams::Teams;
 pub mod tokens;
 pub use tokens::Tokens;
+pub mod usage;
+pub use usage::Usage;
 pub mod users;
 pub use users::Users;
 pub mod webhooks;
@@ -60,13 +66,16 @@ pub struct Services {
     health: Health,
     locale: Locale,
     messaging: Messaging,
+    presences: Presences,
     project: Project,
     proxy: Proxy,
+    advisor: Advisor,
     sites: Sites,
     storage: Storage,
     tables_db: TablesDB,
     teams: Teams,
     tokens: Tokens,
+    usage: Usage,
     users: Users,
     webhooks: Webhooks,
 }
@@ -85,13 +94,16 @@ impl Services {
             health: Health::new(&client),
             locale: Locale::new(&client),
             messaging: Messaging::new(&client),
+            presences: Presences::new(&client),
             project: Project::new(&client),
             proxy: Proxy::new(&client),
+            advisor: Advisor::new(&client),
             sites: Sites::new(&client),
             storage: Storage::new(&client),
             tables_db: TablesDB::new(&client),
             teams: Teams::new(&client),
             tokens: Tokens::new(&client),
+            usage: Usage::new(&client),
             users: Users::new(&client),
             webhooks: Webhooks::new(&client),
             client,
@@ -143,6 +155,10 @@ impl Services {
     pub fn messaging(&self) -> &Messaging {
         &self.messaging
     }
+    /// Get Presences service
+    pub fn presences(&self) -> &Presences {
+        &self.presences
+    }
     /// Get Project service
     pub fn project(&self) -> &Project {
         &self.project
@@ -150,6 +166,10 @@ impl Services {
     /// Get Proxy service
     pub fn proxy(&self) -> &Proxy {
         &self.proxy
+    }
+    /// Get Advisor service
+    pub fn advisor(&self) -> &Advisor {
+        &self.advisor
     }
     /// Get Sites service
     pub fn sites(&self) -> &Sites {
@@ -170,6 +190,10 @@ impl Services {
     /// Get Tokens service
     pub fn tokens(&self) -> &Tokens {
         &self.tokens
+    }
+    /// Get Usage service
+    pub fn usage(&self) -> &Usage {
+        &self.usage
     }
     /// Get Users service
     pub fn users(&self) -> &Users {

@@ -18,6 +18,9 @@ pub struct OAuth2Google {
     /// Google OAuth2 client secret.
     #[serde(rename = "clientSecret")]
     pub client_secret: String,
+    /// Google OAuth2 prompt values.
+    #[serde(rename = "prompt")]
+    pub prompt: Vec<crate::enums::OAuth2GooglePrompt>,
 }
 
 impl OAuth2Google {
@@ -41,6 +44,11 @@ impl OAuth2Google {
         &self.client_secret
     }
 
+    /// Get prompt
+    pub fn prompt(&self) -> &Vec<crate::enums::OAuth2GooglePrompt> {
+        &self.prompt
+    }
+
 }
 
 #[cfg(test)]
@@ -54,6 +62,7 @@ mod tests {
         let _ = _model.enabled();
         let _ = _model.client_id();
         let _ = _model.client_secret();
+        let _ = _model.prompt();
     }
 
     #[test]

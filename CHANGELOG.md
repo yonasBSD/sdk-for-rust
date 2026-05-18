@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.0] - TBD
+## [0.6.0] - TBD
 
 ### Added
 - Initial release of Appwrite Rust SDK
-- Full support for Appwrite API 1.9.4
+- Full support for Appwrite API 1.9.5
 - Async/await support with tokio runtime
 - Built-in error handling with custom error types
 - File upload support with automatic chunking
@@ -32,13 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Health service with 24 methods
 - Locale service with 8 methods
 - Messaging service with 56 methods
-- Project service with 94 methods
+- Presences service with 5 methods
+- Project service with 98 methods
 - Proxy service with 8 methods
+- Advisor service with 5 methods
 - Sites service with 25 methods
 - Storage service with 13 methods
 - TablesDB service with 71 methods
 - Teams service with 13 methods
 - Tokens service with 5 methods
+- Usage service with 2 methods
 - Users service with 49 methods
 - Webhooks service with 6 methods
 
@@ -437,8 +440,22 @@ The Messaging service allows you to send messages to any provider type (SMTP, pu
 
 - `delete_subscriber()` - Delete a subscriber by its unique ID.
 
+#### Presences
+
+- `list()` - List presence logs. Expired entries are filtered out automatically.
+
+- `get()` - Get a presence log by its unique ID. Entries whose `expiresAt` is in the past are treated as not found.
+
+- `upsert()` - Create or update a presence log by its user ID.
+
+- `update_presence()` - Update a presence log by its unique ID. Using the patch method you can pass only specific fields that will get updated.
+
+- `delete()` - Delete a presence log by its unique ID.
+
+
 #### Project
 The Project service allows you to manage all the projects in your Appwrite server.
+- `get()` - Get a project.
 - `delete()` - Delete a project.
 - `update_auth_method()` - Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project. 
 - `list_keys()` - Get a list of all API keys from the current project.
@@ -515,6 +532,9 @@ You can also create a standard API key if you need a longer-lived key instead.
 - `get_platform()` - Get a platform by its unique ID. This endpoint returns the platform&#039;s details, including its name, type, and key configurations.
 - `delete_platform()` - Delete a platform by its unique ID. This endpoint removes the platform and all its configurations from the project.
 - `list_policies()` - Get a list of all project policies and their current configuration.
+- `update_deny_aliased_email_policy()` - Configures if aliased emails such as subaddresses and emails with suffixes are denied during new users sign-ups and email updates.
+- `update_deny_disposable_email_policy()` - Configures if disposable emails from known temporary domains are denied during new users sign-ups and email updates.
+- `update_deny_free_email_policy()` - Configures if emails from free providers such as Gmail or Yahoo are denied during new users sign-ups and email updates.
 - `update_membership_privacy_policy()` - Updating this policy allows you to control if team members can see other members information. When enabled, all team members can see ID, name, email, phone number, and MFA status of other members..
 - `update_password_dictionary_policy()` - Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
 - `update_password_history_policy()` - Updates one of password strength policies. Based on total length configured, previous password hashes are stored, and users cannot choose a new password that is already stored in the passwird history list, when updating an user password, or setting new one through password recovery.
@@ -558,6 +578,19 @@ Rule ID is automatically generated as MD5 hash of a rule domain for performance 
 - `get_rule()` - Get a proxy rule by its unique ID.
 - `delete_rule()` - Delete a proxy rule by its unique ID.
 - `update_rule_status()` - If not succeeded yet, retry verification process of a proxy rule domain. This endpoint triggers domain verification by checking DNS records. If verification is successful, a TLS certificate will be automatically provisioned for the domain asynchronously in the background.
+
+#### Advisor
+The Advisor service surfaces actionable reports about your project resources, with CTA descriptors for one-click remediation in the console.
+- `list_reports()` - Get a list of all the project&#039;s analyzer reports. You can use the query params to filter your results.
+
+- `get_report()` - Get an analyzer report by its unique ID. The response includes the report&#039;s metadata and the nested insights it produced.
+
+- `delete_report()` - Delete an analyzer report by its unique ID. Nested insights and CTA metadata are removed asynchronously by the deletes worker.
+
+- `list_insights()` - List the insights produced under a single analyzer report. You can use the query params to filter your results further.
+
+- `get_insight()` - Get an insight by its unique ID, scoped to its parent report.
+
 
 #### Sites
 The Sites Service allows you view, create and manage your web applications.
@@ -752,6 +785,11 @@ If the request is successful, a session for the user is automatically created.
 - `update()` - Update a token by its unique ID. Use this endpoint to update a token&#039;s expiry date.
 - `delete()` - Delete a token by its unique ID.
 
+#### Usage
+
+- `list_events()` - Query usage event metrics from the usage database. Returns individual event rows with full metadata. Pass Query objects as JSON strings to filter, paginate, and order results. Supported query methods: equal, greaterThanEqual, lessThanEqual, orderAsc, orderDesc, limit, offset. Supported filter attributes: metric, path, method, status, resource, resourceId, country, userAgent, time (these match the underlying column names — note that the response surfaces `resource` as `resourceType` and `country` as `countryCode`). When no time filter is supplied the endpoint defaults to the last 7 days. Default `limit(100)` is applied if none is given; user-supplied limits are capped at 500. The `total` field is capped at 5000 to keep counts predictable — pass `total=false` to skip the count entirely.
+- `list_gauges()` - Query usage gauge metrics (point-in-time resource snapshots) from the usage database. Returns individual gauge snapshots with metric, value, and timestamp. Pass Query objects as JSON strings to filter, paginate, and order results. Supported query methods: equal, greaterThanEqual, lessThanEqual, orderAsc, orderDesc, limit, offset. Supported filter attributes: metric, time. Use `orderDesc(&quot;time&quot;), limit(1)` to fetch the most recent snapshot. When no time filter is supplied the endpoint defaults to the last 7 days. Default `limit(100)` is applied if none is given; user-supplied limits are capped at 500. The `total` field is capped at 5000 to keep counts predictable — pass `total=false` to skip the count entirely.
+
 #### Users
 The Users service allows you to manage your project users.
 - `list()` - Get a list of all the project&#039;s users. You can use the query params to filter your results.
@@ -823,6 +861,7 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 ### Models
 - `RowList` - Rows List
 - `DocumentList` - Documents List
+- `PresenceList` - Presences List
 - `TableList` - Tables List
 - `CollectionList` - Collections List
 - `DatabaseList` - Databases List
@@ -864,6 +903,8 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `TargetList` - Target list
 - `TransactionList` - Transaction List
 - `SpecificationList` - Specifications List
+- `InsightList` - Insights List
+- `ReportList` - Reports List
 - `Database` - Database
 - `Collection` - Collection
 - `AttributeList` - Attributes List
@@ -909,6 +950,7 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `ColumnIndex` - Index
 - `Row` - Row
 - `Document` - Document
+- `Presence` - Presence
 - `Log` - Log
 - `User` - User
 - `AlgoMd5` - AlgoMD5
@@ -938,6 +980,9 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `Deployment` - Deployment
 - `Execution` - Execution
 - `Project` - Project
+- `ProjectAuthMethod` - ProjectAuthMethod
+- `ProjectService` - ProjectService
+- `ProjectProtocol` - ProjectProtocol
 - `Webhook` - Webhook
 - `Key` - Key
 - `EphemeralKey` - Ephemeral Key
@@ -993,7 +1038,6 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `PolicySessionLimit` - Policy Session Limit
 - `PolicyUserLimit` - Policy User Limit
 - `PolicyMembershipPrivacy` - Policy Membership Privacy
-- `AuthProvider` - AuthProvider
 - `PlatformWeb` - Platform Web
 - `PlatformApple` - Platform Apple
 - `PlatformAndroid` - Platform Android
@@ -1025,12 +1069,19 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `Transaction` - Transaction
 - `Subscriber` - Subscriber
 - `Target` - Target
+- `Insight` - Insight
+- `InsightCTA` - InsightCTA
+- `Report` - Report
 - `ActivityEvent` - ActivityEvent
 - `BackupArchive` - Archive
 - `BillingLimits` - BillingLimits
 - `Block` - Block
 - `BackupPolicy` - backup
 - `BackupRestoration` - Restoration
+- `UsageEvent` - usageEvent
+- `UsageEventList` - Usage events list
+- `UsageGauge` - usageGauge
+- `UsageGaugeList` - Usage gauges list
 - `ActivityEventList` - Activity event list
 - `BackupArchiveList` - Backup archive list
 - `BackupPolicyList` - Backup policy list
@@ -1050,4 +1101,4 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - File upload examples
 - Query builder documentation
 
-[0.5.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.5.0
+[0.6.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.6.0

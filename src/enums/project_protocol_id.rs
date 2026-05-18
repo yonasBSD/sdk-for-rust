@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum ProtocolId {
+pub enum ProjectProtocolId {
     #[serde(rename = "rest")]
     #[default]
     Rest,
@@ -11,18 +11,18 @@ pub enum ProtocolId {
     Websocket,
 }
 
-impl ProtocolId {
+impl ProjectProtocolId {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            ProtocolId::Rest => "rest",
-            ProtocolId::Graphql => "graphql",
-            ProtocolId::Websocket => "websocket",
+            ProjectProtocolId::Rest => "rest",
+            ProjectProtocolId::Graphql => "graphql",
+            ProjectProtocolId::Websocket => "websocket",
         }
     }
 }
 
-impl std::fmt::Display for ProtocolId {
+impl std::fmt::Display for ProjectProtocolId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }

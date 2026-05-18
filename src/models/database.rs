@@ -28,10 +28,10 @@ pub struct Database {
     pub r#type: crate::enums::DatabaseType,
     /// Database backup policies.
     #[serde(rename = "policies")]
-    pub policies: Vec<crate::models::Index>,
+    pub policies: Vec<crate::models::BackupPolicy>,
     /// Database backup archives.
     #[serde(rename = "archives")]
-    pub archives: Vec<crate::models::Collection>,
+    pub archives: Vec<crate::models::BackupArchive>,
 }
 
 impl Database {
@@ -66,12 +66,12 @@ impl Database {
     }
 
     /// Get policies
-    pub fn policies(&self) -> &Vec<crate::models::Index> {
+    pub fn policies(&self) -> &Vec<crate::models::BackupPolicy> {
         &self.policies
     }
 
     /// Get archives
-    pub fn archives(&self) -> &Vec<crate::models::Collection> {
+    pub fn archives(&self) -> &Vec<crate::models::BackupArchive> {
         &self.archives
     }
 
