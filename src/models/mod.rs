@@ -4,6 +4,8 @@ pub mod row_list;
 pub use row_list::RowList;
 pub mod document_list;
 pub use document_list::DocumentList;
+pub mod presence_list;
+pub use presence_list::PresenceList;
 pub mod table_list;
 pub use table_list::TableList;
 pub mod collection_list;
@@ -86,6 +88,10 @@ pub mod transaction_list;
 pub use transaction_list::TransactionList;
 pub mod specification_list;
 pub use specification_list::SpecificationList;
+pub mod insight_list;
+pub use insight_list::InsightList;
+pub mod report_list;
+pub use report_list::ReportList;
 pub mod database;
 pub use database::Database;
 pub mod collection;
@@ -176,6 +182,8 @@ pub mod row;
 pub use row::Row;
 pub mod document;
 pub use document::Document;
+pub mod presence;
+pub use presence::Presence;
 pub mod log;
 pub use log::Log;
 pub mod user;
@@ -234,6 +242,12 @@ pub mod execution;
 pub use execution::Execution;
 pub mod project;
 pub use project::Project;
+pub mod project_auth_method;
+pub use project_auth_method::ProjectAuthMethod;
+pub mod project_service;
+pub use project_service::ProjectService;
+pub mod project_protocol;
+pub use project_protocol::ProjectProtocol;
 pub mod webhook;
 pub use webhook::Webhook;
 pub mod key;
@@ -344,8 +358,6 @@ pub mod policy_user_limit;
 pub use policy_user_limit::PolicyUserLimit;
 pub mod policy_membership_privacy;
 pub use policy_membership_privacy::PolicyMembershipPrivacy;
-pub mod auth_provider;
-pub use auth_provider::AuthProvider;
 pub mod platform_web;
 pub use platform_web::PlatformWeb;
 pub mod platform_apple;
@@ -408,6 +420,12 @@ pub mod subscriber;
 pub use subscriber::Subscriber;
 pub mod target;
 pub use target::Target;
+pub mod insight;
+pub use insight::Insight;
+pub mod insight_cta;
+pub use insight_cta::InsightCTA;
+pub mod report;
+pub use report::Report;
 pub mod activity_event;
 pub use activity_event::ActivityEvent;
 pub mod backup_archive;
@@ -420,6 +438,14 @@ pub mod backup_policy;
 pub use backup_policy::BackupPolicy;
 pub mod backup_restoration;
 pub use backup_restoration::BackupRestoration;
+pub mod usage_event;
+pub use usage_event::UsageEvent;
+pub mod usage_event_list;
+pub use usage_event_list::UsageEventList;
+pub mod usage_gauge;
+pub use usage_gauge::UsageGauge;
+pub mod usage_gauge_list;
+pub use usage_gauge_list::UsageGaugeList;
 pub mod activity_event_list;
 pub use activity_event_list::ActivityEventList;
 pub mod backup_archive_list;
@@ -438,6 +464,7 @@ pub trait Model: Serialize + for<'de> Deserialize<'de> + Clone + std::fmt::Debug
 // Implement the trait for all generated models
 impl Model for RowList {}
 impl Model for DocumentList {}
+impl Model for PresenceList {}
 impl Model for TableList {}
 impl Model for CollectionList {}
 impl Model for DatabaseList {}
@@ -479,6 +506,8 @@ impl Model for SubscriberList {}
 impl Model for TargetList {}
 impl Model for TransactionList {}
 impl Model for SpecificationList {}
+impl Model for InsightList {}
+impl Model for ReportList {}
 impl Model for Database {}
 impl Model for Collection {}
 impl Model for AttributeList {}
@@ -524,6 +553,7 @@ impl Model for Index {}
 impl Model for ColumnIndex {}
 impl Model for Row {}
 impl Model for Document {}
+impl Model for Presence {}
 impl Model for Log {}
 impl Model for User {}
 impl Model for AlgoMd5 {}
@@ -553,6 +583,9 @@ impl Model for FrameworkAdapter {}
 impl Model for Deployment {}
 impl Model for Execution {}
 impl Model for Project {}
+impl Model for ProjectAuthMethod {}
+impl Model for ProjectService {}
+impl Model for ProjectProtocol {}
 impl Model for Webhook {}
 impl Model for Key {}
 impl Model for EphemeralKey {}
@@ -608,7 +641,6 @@ impl Model for PolicySessionInvalidation {}
 impl Model for PolicySessionLimit {}
 impl Model for PolicyUserLimit {}
 impl Model for PolicyMembershipPrivacy {}
-impl Model for AuthProvider {}
 impl Model for PlatformWeb {}
 impl Model for PlatformApple {}
 impl Model for PlatformAndroid {}
@@ -640,12 +672,19 @@ impl Model for Topic {}
 impl Model for Transaction {}
 impl Model for Subscriber {}
 impl Model for Target {}
+impl Model for Insight {}
+impl Model for InsightCTA {}
+impl Model for Report {}
 impl Model for ActivityEvent {}
 impl Model for BackupArchive {}
 impl Model for BillingLimits {}
 impl Model for Block {}
 impl Model for BackupPolicy {}
 impl Model for BackupRestoration {}
+impl Model for UsageEvent {}
+impl Model for UsageEventList {}
+impl Model for UsageGauge {}
+impl Model for UsageGaugeList {}
 impl Model for ActivityEventList {}
 impl Model for BackupArchiveList {}
 impl Model for BackupPolicyList {}

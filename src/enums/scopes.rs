@@ -159,6 +159,18 @@ pub enum Scopes {
     VcsRead,
     #[serde(rename = "vcs.write")]
     VcsWrite,
+    #[serde(rename = "insights.read")]
+    InsightsRead,
+    #[serde(rename = "insights.write")]
+    InsightsWrite,
+    #[serde(rename = "reports.read")]
+    ReportsRead,
+    #[serde(rename = "reports.write")]
+    ReportsWrite,
+    #[serde(rename = "presences.read")]
+    PresencesRead,
+    #[serde(rename = "presences.write")]
+    PresencesWrite,
     #[serde(rename = "backups.policies.read")]
     BackupsPoliciesRead,
     #[serde(rename = "backups.policies.write")]
@@ -177,6 +189,8 @@ pub enum Scopes {
     DomainsWrite,
     #[serde(rename = "events.read")]
     EventsRead,
+    #[serde(rename = "usage.read")]
+    UsageRead,
 }
 
 impl Scopes {
@@ -261,6 +275,12 @@ impl Scopes {
             Scopes::SchedulesWrite => "schedules.write",
             Scopes::VcsRead => "vcs.read",
             Scopes::VcsWrite => "vcs.write",
+            Scopes::InsightsRead => "insights.read",
+            Scopes::InsightsWrite => "insights.write",
+            Scopes::ReportsRead => "reports.read",
+            Scopes::ReportsWrite => "reports.write",
+            Scopes::PresencesRead => "presences.read",
+            Scopes::PresencesWrite => "presences.write",
             Scopes::BackupsPoliciesRead => "backups.policies.read",
             Scopes::BackupsPoliciesWrite => "backups.policies.write",
             Scopes::ArchivesRead => "archives.read",
@@ -270,6 +290,7 @@ impl Scopes {
             Scopes::DomainsRead => "domains.read",
             Scopes::DomainsWrite => "domains.write",
             Scopes::EventsRead => "events.read",
+            Scopes::UsageRead => "usage.read",
         }
     }
 }

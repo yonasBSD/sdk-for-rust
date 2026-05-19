@@ -22,6 +22,17 @@ impl Project {
         &self.client
     }
 
+    /// Get a project.
+    pub async fn get(
+        &self,
+    ) -> crate::error::Result<crate::models::Project> {
+        let params = HashMap::new();
+
+        let path = "/project".to_string();
+
+        self.client.call(Method::GET, &path, None, Some(params)).await
+    }
+
     /// Delete a project.
     pub async fn delete(
         &self,
@@ -39,7 +50,7 @@ impl Project {
     /// disable a method in your project.
     pub async fn update_auth_method(
         &self,
-        method_id: crate::enums::AuthMethod,
+        method_id: crate::enums::ProjectAuthMethodId,
         enabled: bool,
     ) -> crate::error::Result<crate::models::Project> {
         let mut params = HashMap::new();
@@ -80,7 +91,7 @@ impl Project {
         &self,
         key_id: impl Into<String>,
         name: impl Into<String>,
-        scopes: Vec<crate::enums::Scopes>,
+        scopes: Vec<crate::enums::ProjectKeyScopes>,
         expire: Option<&str>,
     ) -> crate::error::Result<crate::models::Key> {
         let mut params = HashMap::new();
@@ -105,7 +116,7 @@ impl Project {
     /// instead.
     pub async fn create_ephemeral_key(
         &self,
-        scopes: Vec<crate::enums::Scopes>,
+        scopes: Vec<crate::enums::ProjectKeyScopes>,
         duration: i64,
     ) -> crate::error::Result<crate::models::EphemeralKey> {
         let mut params = HashMap::new();
@@ -137,7 +148,7 @@ impl Project {
         &self,
         key_id: impl Into<String>,
         name: impl Into<String>,
-        scopes: Vec<crate::enums::Scopes>,
+        scopes: Vec<crate::enums::ProjectKeyScopes>,
         expire: Option<&str>,
     ) -> crate::error::Result<crate::models::Key> {
         let mut params = HashMap::new();
@@ -768,6 +779,7 @@ impl Project {
         &self,
         client_id: Option<&str>,
         client_secret: Option<&str>,
+        prompt: Option<Vec<crate::enums::ProjectOAuth2GooglePrompt>>,
         enabled: Option<bool>,
     ) -> crate::error::Result<crate::models::OAuth2Google> {
         let mut params = HashMap::new();
@@ -776,6 +788,9 @@ impl Project {
         }
         if let Some(value) = client_secret {
             params.insert("clientSecret".to_string(), json!(value));
+        }
+        if let Some(value) = prompt {
+            params.insert("prompt".to_string(), json!(value));
         }
         if let Some(value) = enabled {
             params.insert("enabled".to_string(), json!(value));
@@ -1404,7 +1419,7 @@ impl Project {
     /// secret, p8 file, key/team IDs) are write-only and always returned empty.
     pub async fn get_o_auth2_provider(
         &self,
-        provider_id: crate::enums::OAuthProvider,
+        provider_id: crate::enums::ProjectOAuthProviderId,
     ) -> crate::error::Result<serde_json::Value> {
         let params = HashMap::new();
 
@@ -1680,6 +1695,54 @@ impl Project {
         self.client.call(Method::GET, &path, None, Some(params)).await
     }
 
+    /// Configures if aliased emails such as subaddresses and emails with suffixes
+    /// are denied during new users sign-ups and email updates.
+    pub async fn update_deny_aliased_email_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/deny-aliased-email".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Configures if disposable emails from known temporary domains are denied
+    /// during new users sign-ups and email updates.
+    pub async fn update_deny_disposable_email_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/deny-disposable-email".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Configures if emails from free providers such as Gmail or Yahoo are denied
+    /// during new users sign-ups and email updates.
+    pub async fn update_deny_free_email_policy(
+        &self,
+        enabled: bool,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/deny-free-email".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
     /// Updating this policy allows you to control if team members can see other
     /// members information. When enabled, all team members can see ID, name,
     /// email, phone number, and MFA status of other members..
@@ -1868,7 +1931,7 @@ impl Project {
     /// configuration for the requested project policy.
     pub async fn get_policy(
         &self,
-        policy_id: crate::enums::ProjectPolicy,
+        policy_id: crate::enums::ProjectPolicyId,
     ) -> crate::error::Result<serde_json::Value> {
         let params = HashMap::new();
 
@@ -1881,7 +1944,7 @@ impl Project {
     /// disable a protocol in your project.
     pub async fn update_protocol(
         &self,
-        protocol_id: crate::enums::ProtocolId,
+        protocol_id: crate::enums::ProjectProtocolId,
         enabled: bool,
     ) -> crate::error::Result<crate::models::Project> {
         let mut params = HashMap::new();
@@ -1898,7 +1961,7 @@ impl Project {
     /// disable a service in your project.
     pub async fn update_service(
         &self,
-        service_id: crate::enums::ServiceId,
+        service_id: crate::enums::ProjectServiceId,
         enabled: bool,
     ) -> crate::error::Result<crate::models::Project> {
         let mut params = HashMap::new();
@@ -1925,7 +1988,7 @@ impl Project {
         sender_name: Option<&str>,
         reply_to_email: Option<&str>,
         reply_to_name: Option<&str>,
-        secure: Option<crate::enums::Secure>,
+        secure: Option<crate::enums::ProjectSMTPSecure>,
         enabled: Option<bool>,
     ) -> crate::error::Result<crate::models::Project> {
         let mut params = HashMap::new();
@@ -2008,8 +2071,8 @@ impl Project {
     #[allow(clippy::too_many_arguments)]
     pub async fn update_email_template(
         &self,
-        template_id: crate::enums::EmailTemplateType,
-        locale: Option<crate::enums::EmailTemplateLocale>,
+        template_id: crate::enums::ProjectEmailTemplateId,
+        locale: Option<crate::enums::ProjectEmailTemplateLocale>,
         subject: Option<&str>,
         message: Option<&str>,
         sender_name: Option<&str>,
@@ -2053,8 +2116,8 @@ impl Project {
     /// details.
     pub async fn get_email_template(
         &self,
-        template_id: crate::enums::EmailTemplateType,
-        locale: Option<crate::enums::EmailTemplateLocale>,
+        template_id: crate::enums::ProjectEmailTemplateId,
+        locale: Option<crate::enums::ProjectEmailTemplateLocale>,
     ) -> crate::error::Result<crate::models::EmailTemplate> {
         let mut params = HashMap::new();
         if let Some(value) = locale {
