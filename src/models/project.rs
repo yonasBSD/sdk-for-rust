@@ -81,7 +81,8 @@ pub struct Project {
     pub region: String,
     /// Billing limits reached
     #[serde(rename = "billingLimits")]
-    pub billing_limits: crate::models::BillingLimits,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_limits: Option<crate::models::BillingLimits>,
     /// Project blocks information
     #[serde(rename = "blocks")]
     pub blocks: Vec<crate::models::Block>,
@@ -212,9 +213,15 @@ impl Project {
         &self.region
     }
 
+    /// Set billing_limits
+    pub fn set_billing_limits(mut self, billing_limits: crate::models::BillingLimits) -> Self {
+        self.billing_limits = Some(billing_limits);
+        self
+    }
+
     /// Get billing_limits
-    pub fn billing_limits(&self) -> &crate::models::BillingLimits {
-        &self.billing_limits
+    pub fn billing_limits(&self) -> Option<&crate::models::BillingLimits> {
+        self.billing_limits.as_ref()
     }
 
     /// Get blocks
@@ -260,7 +267,6 @@ mod tests {
         let _ = _model.services();
         let _ = _model.protocols();
         let _ = _model.region();
-        let _ = _model.billing_limits();
         let _ = _model.blocks();
         let _ = _model.console_accessed_at();
     }
