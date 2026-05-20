@@ -34,6 +34,9 @@ pub struct File {
     /// File original size in bytes.
     #[serde(rename = "sizeOriginal")]
     pub size_original: i64,
+    /// File actual stored size in bytes after compression and/or encryption.
+    #[serde(rename = "sizeActual")]
+    pub size_actual: i64,
     /// Total number of chunks available
     #[serde(rename = "chunksTotal")]
     pub chunks_total: i64,
@@ -96,6 +99,11 @@ impl File {
         &self.size_original
     }
 
+    /// Get size_actual
+    pub fn size_actual(&self) -> &i64 {
+        &self.size_actual
+    }
+
     /// Get chunks_total
     pub fn chunks_total(&self) -> &i64 {
         &self.chunks_total
@@ -134,6 +142,7 @@ mod tests {
         let _ = _model.signature();
         let _ = _model.mime_type();
         let _ = _model.size_original();
+        let _ = _model.size_actual();
         let _ = _model.chunks_total();
         let _ = _model.chunks_uploaded();
         let _ = _model.encryption();
