@@ -46,6 +46,7 @@ impl UploadProgress {
 pub struct UploadOptions<F> {
     pub upload_id: Option<String>,
     pub on_progress: Option<F>,
+    pub max_concurrency: Option<usize>,
 }
 
 impl<F> Default for UploadOptions<F> {
@@ -53,6 +54,7 @@ impl<F> Default for UploadOptions<F> {
         Self {
             upload_id: None,
             on_progress: None,
+            max_concurrency: None,
         }
     }
 }
@@ -615,6 +617,7 @@ impl Client {
             UploadOptions {
                 upload_id,
                 on_progress: None::<fn(UploadProgress)>,
+                max_concurrency: None,
             },
         )
         .await
@@ -752,6 +755,7 @@ impl Client {
         let mut next_chunk = start_chunk;
         let mut uploaded_chunks = start_chunk;
         let mut uploaded_bytes = (start_chunk * chunk_size as u64).min(file_size);
+        let mut completed_response = None;
 
         let is_upload_complete = |response: &Value| -> bool {
             let Some(chunks_uploaded) = response.get("chunksUploaded").and_then(|v| v.as_u64()) else {
@@ -785,6 +789,9 @@ impl Client {
             uploaded_chunks = 1;
             uploaded_bytes = (chunk_size as u64).min(file_size);
             last_response = Some(result.clone());
+            if is_upload_complete(&result) {
+                completed_response = Some(result.clone());
+            }
 
             if let Some(ref callback) = options.on_progress {
                 callback(UploadProgress {
@@ -798,7 +805,7 @@ impl Client {
             next_chunk = 1;
         }
 
-        let max_concurrency = 8usize;
+        let max_concurrency = options.max_concurrency.unwrap_or(8).max(1);
         let mut tasks = JoinSet::new();
 
         while tasks.len() < max_concurrency && next_chunk < total_chunks {
@@ -833,8 +840,9 @@ impl Client {
             let (chunk_index, result) = joined
                 .map_err(|e| AppwriteError::new(0, format!("Chunk upload task failed: {}", e), None, String::new()))??;
 
+            last_response = Some(result.clone());
             if is_upload_complete(&result) {
-                last_response = Some(result.clone());
+                completed_response = Some(result.clone());
             }
 
             uploaded_chunks += 1;
@@ -880,7 +888,8 @@ impl Client {
             }
         }
 
-        last_response
+        completed_response
+            .or(last_response)
             .ok_or_else(|| AppwriteError::new(0, "No chunks uploaded", None, String::new()))
             .and_then(|v| serde_json::from_value(v).map_err(Into::into))
     }
