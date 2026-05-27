@@ -9,18 +9,18 @@ pub struct ActivityEvent {
     /// Event ID.
     #[serde(rename = "$id")]
     pub id: String,
-    /// User type.
-    #[serde(rename = "userType")]
-    pub user_type: String,
-    /// User ID.
-    #[serde(rename = "userId")]
-    pub user_id: String,
-    /// User Email.
-    #[serde(rename = "userEmail")]
-    pub user_email: String,
-    /// User Name.
-    #[serde(rename = "userName")]
-    pub user_name: String,
+    /// Actor type.
+    #[serde(rename = "actorType")]
+    pub actor_type: String,
+    /// Actor ID.
+    #[serde(rename = "actorId")]
+    pub actor_id: String,
+    /// Actor Email.
+    #[serde(rename = "actorEmail")]
+    pub actor_email: String,
+    /// Actor Name.
+    #[serde(rename = "actorName")]
+    pub actor_name: String,
     /// Resource parent.
     #[serde(rename = "resourceParent")]
     pub resource_parent: String,
@@ -112,24 +112,24 @@ impl ActivityEvent {
         &self.id
     }
 
-    /// Get user_type
-    pub fn user_type(&self) -> &String {
-        &self.user_type
+    /// Get actor_type
+    pub fn actor_type(&self) -> &String {
+        &self.actor_type
     }
 
-    /// Get user_id
-    pub fn user_id(&self) -> &String {
-        &self.user_id
+    /// Get actor_id
+    pub fn actor_id(&self) -> &String {
+        &self.actor_id
     }
 
-    /// Get user_email
-    pub fn user_email(&self) -> &String {
-        &self.user_email
+    /// Get actor_email
+    pub fn actor_email(&self) -> &String {
+        &self.actor_email
     }
 
-    /// Get user_name
-    pub fn user_name(&self) -> &String {
-        &self.user_name
+    /// Get actor_name
+    pub fn actor_name(&self) -> &String {
+        &self.actor_name
     }
 
     /// Get resource_parent
@@ -277,10 +277,10 @@ mod tests {
     fn test_activity_event_creation() {
         let _model = <ActivityEvent as Default>::default();
         let _ = _model.id();
-        let _ = _model.user_type();
-        let _ = _model.user_id();
-        let _ = _model.user_email();
-        let _ = _model.user_name();
+        let _ = _model.actor_type();
+        let _ = _model.actor_id();
+        let _ = _model.actor_email();
+        let _ = _model.actor_name();
         let _ = _model.resource_parent();
         let _ = _model.resource_type();
         let _ = _model.resource_id();

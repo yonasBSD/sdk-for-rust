@@ -98,6 +98,14 @@ pub struct Function {
     /// requests
     #[serde(rename = "providerSilentMode")]
     pub provider_silent_mode: bool,
+    /// List of branch name patterns that trigger automatic deployments. Supports
+    /// glob wildcards. Empty list deploys on all branches.
+    #[serde(rename = "providerBranches")]
+    pub provider_branches: Vec<String>,
+    /// List of file path patterns that trigger automatic deployments. Supports
+    /// glob wildcards. Empty list deploys on all file changes.
+    #[serde(rename = "providerPaths")]
+    pub provider_paths: Vec<String>,
     /// Machine specification for deployment builds.
     #[serde(rename = "buildSpecification")]
     pub build_specification: String,
@@ -247,6 +255,16 @@ impl Function {
         &self.provider_silent_mode
     }
 
+    /// Get provider_branches
+    pub fn provider_branches(&self) -> &Vec<String> {
+        &self.provider_branches
+    }
+
+    /// Get provider_paths
+    pub fn provider_paths(&self) -> &Vec<String> {
+        &self.provider_paths
+    }
+
     /// Get build_specification
     pub fn build_specification(&self) -> &String {
         &self.build_specification
@@ -294,6 +312,8 @@ mod tests {
         let _ = _model.provider_branch();
         let _ = _model.provider_root_directory();
         let _ = _model.provider_silent_mode();
+        let _ = _model.provider_branches();
+        let _ = _model.provider_paths();
         let _ = _model.build_specification();
         let _ = _model.runtime_specification();
     }

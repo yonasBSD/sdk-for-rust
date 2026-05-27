@@ -17,11 +17,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Some(1920), // optional
         Some(1080), // optional
         Some(2), // optional
-        Some(appwrite::enums::Theme::Dark), // optional
+        Some(appwrite::enums::BrowserTheme::Dark), // optional
         Some("Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15"), // optional
         Some(true), // optional
         Some("en-US"), // optional
-        Some(appwrite::enums::Timezone::AmericaNewYork), // optional
+        Some(appwrite::enums::Timezone::AfricaAbidjan), // optional
         Some(37.7749), // optional
         Some(-122.4194), // optional
         Some(100), // optional

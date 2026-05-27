@@ -51,8 +51,8 @@ impl Sites {
         &self,
         site_id: impl Into<String>,
         name: impl Into<String>,
-        framework: crate::enums::Framework,
-        build_runtime: crate::enums::BuildRuntime,
+        framework: crate::enums::SiteFramework,
+        build_runtime: crate::enums::SiteBuildRuntime,
         enabled: Option<bool>,
         logging: Option<bool>,
         timeout: Option<i64>,
@@ -60,13 +60,15 @@ impl Sites {
         build_command: Option<&str>,
         start_command: Option<&str>,
         output_directory: Option<&str>,
-        adapter: Option<crate::enums::Adapter>,
+        adapter: Option<crate::enums::SiteAdapter>,
         installation_id: Option<&str>,
         fallback_file: Option<&str>,
         provider_repository_id: Option<&str>,
         provider_branch: Option<&str>,
         provider_silent_mode: Option<bool>,
         provider_root_directory: Option<&str>,
+        provider_branches: Option<Vec<String>>,
+        provider_paths: Option<Vec<String>>,
         build_specification: Option<&str>,
         runtime_specification: Option<&str>,
         deployment_retention: Option<i64>,
@@ -117,6 +119,12 @@ impl Sites {
         }
         if let Some(value) = provider_root_directory {
             params.insert("providerRootDirectory".to_string(), json!(value));
+        }
+        if let Some(value) = provider_branches {
+            params.insert("providerBranches".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        }
+        if let Some(value) = provider_paths {
+            params.insert("providerPaths".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
         }
         if let Some(value) = build_specification {
             params.insert("buildSpecification".to_string(), json!(value));
@@ -176,7 +184,7 @@ impl Sites {
         &self,
         site_id: impl Into<String>,
         name: impl Into<String>,
-        framework: crate::enums::Framework,
+        framework: crate::enums::SiteFramework,
         enabled: Option<bool>,
         logging: Option<bool>,
         timeout: Option<i64>,
@@ -184,14 +192,16 @@ impl Sites {
         build_command: Option<&str>,
         start_command: Option<&str>,
         output_directory: Option<&str>,
-        build_runtime: Option<crate::enums::BuildRuntime>,
-        adapter: Option<crate::enums::Adapter>,
+        build_runtime: Option<crate::enums::SiteBuildRuntime>,
+        adapter: Option<crate::enums::SiteAdapter>,
         fallback_file: Option<&str>,
         installation_id: Option<&str>,
         provider_repository_id: Option<&str>,
         provider_branch: Option<&str>,
         provider_silent_mode: Option<bool>,
         provider_root_directory: Option<&str>,
+        provider_branches: Option<Vec<String>>,
+        provider_paths: Option<Vec<String>>,
         build_specification: Option<&str>,
         runtime_specification: Option<&str>,
         deployment_retention: Option<i64>,
@@ -243,6 +253,12 @@ impl Sites {
         }
         if let Some(value) = provider_root_directory {
             params.insert("providerRootDirectory".to_string(), json!(value));
+        }
+        if let Some(value) = provider_branches {
+            params.insert("providerBranches".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        }
+        if let Some(value) = provider_paths {
+            params.insert("providerPaths".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
         }
         if let Some(value) = build_specification {
             params.insert("buildSpecification".to_string(), json!(value));

@@ -15,6 +15,12 @@ pub struct UsageGauge {
     /// The snapshot timestamp.
     #[serde(rename = "time")]
     pub time: String,
+    /// The resource type.
+    #[serde(rename = "resourceType")]
+    pub resource_type: String,
+    /// The resource ID.
+    #[serde(rename = "resourceId")]
+    pub resource_id: String,
 }
 
 impl UsageGauge {
@@ -33,6 +39,16 @@ impl UsageGauge {
         &self.time
     }
 
+    /// Get resource_type
+    pub fn resource_type(&self) -> &String {
+        &self.resource_type
+    }
+
+    /// Get resource_id
+    pub fn resource_id(&self) -> &String {
+        &self.resource_id
+    }
+
 }
 
 #[cfg(test)]
@@ -45,6 +61,8 @@ mod tests {
         let _ = _model.metric();
         let _ = _model.value();
         let _ = _model.time();
+        let _ = _model.resource_type();
+        let _ = _model.resource_id();
     }
 
     #[test]

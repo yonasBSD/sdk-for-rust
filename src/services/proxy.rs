@@ -93,7 +93,7 @@ impl Proxy {
         &self,
         domain: impl Into<String>,
         url: impl Into<String>,
-        status_code: crate::enums::StatusCode,
+        status_code: crate::enums::RedirectStatusCode,
         resource_id: impl Into<String>,
         resource_type: crate::enums::ProxyResourceType,
     ) -> crate::error::Result<crate::models::ProxyRule> {

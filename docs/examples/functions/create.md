@@ -14,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let result = functions.create(
         "<FUNCTION_ID>",
         "<NAME>",
-        appwrite::enums::Runtime::Node145,
+        appwrite::enums::FunctionRuntime::Node145,
         Some(vec!["any".into()]), // optional
         Some(vec![]), // optional
         Some(""), // optional
@@ -23,12 +23,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         Some(false), // optional
         Some("<ENTRYPOINT>"), // optional
         Some("<COMMANDS>"), // optional
-        Some(vec![appwrite::enums::Scopes::ProjectRead]), // optional
+        Some(vec![appwrite::enums::ProjectKeyScopes::ProjectRead]), // optional
         Some("<INSTALLATION_ID>"), // optional
         Some("<PROVIDER_REPOSITORY_ID>"), // optional
         Some("<PROVIDER_BRANCH>"), // optional
         Some(false), // optional
         Some("<PROVIDER_ROOT_DIRECTORY>"), // optional
+        Some(vec![]), // optional
+        Some(vec![]), // optional
         Some(""), // optional
         Some(""), // optional
         Some(0) // optional

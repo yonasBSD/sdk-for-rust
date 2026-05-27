@@ -250,7 +250,7 @@ impl Avatars {
         viewport_width: Option<i64>,
         viewport_height: Option<i64>,
         scale: Option<f64>,
-        theme: Option<crate::enums::Theme>,
+        theme: Option<crate::enums::BrowserTheme>,
         user_agent: Option<&str>,
         fullpage: Option<bool>,
         locale: Option<&str>,

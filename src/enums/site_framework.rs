@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum Framework {
+pub enum SiteFramework {
     #[serde(rename = "analog")]
     #[default]
     Analog,
@@ -35,30 +35,30 @@ pub enum Framework {
     Other,
 }
 
-impl Framework {
+impl SiteFramework {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            Framework::Analog => "analog",
-            Framework::Angular => "angular",
-            Framework::Nextjs => "nextjs",
-            Framework::React => "react",
-            Framework::Nuxt => "nuxt",
-            Framework::Vue => "vue",
-            Framework::Sveltekit => "sveltekit",
-            Framework::Astro => "astro",
-            Framework::TanstackStart => "tanstack-start",
-            Framework::Remix => "remix",
-            Framework::Lynx => "lynx",
-            Framework::Flutter => "flutter",
-            Framework::ReactNative => "react-native",
-            Framework::Vite => "vite",
-            Framework::Other => "other",
+            SiteFramework::Analog => "analog",
+            SiteFramework::Angular => "angular",
+            SiteFramework::Nextjs => "nextjs",
+            SiteFramework::React => "react",
+            SiteFramework::Nuxt => "nuxt",
+            SiteFramework::Vue => "vue",
+            SiteFramework::Sveltekit => "sveltekit",
+            SiteFramework::Astro => "astro",
+            SiteFramework::TanstackStart => "tanstack-start",
+            SiteFramework::Remix => "remix",
+            SiteFramework::Lynx => "lynx",
+            SiteFramework::Flutter => "flutter",
+            SiteFramework::ReactNative => "react-native",
+            SiteFramework::Vite => "vite",
+            SiteFramework::Other => "other",
         }
     }
 }
 
-impl std::fmt::Display for Framework {
+impl std::fmt::Display for SiteFramework {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }

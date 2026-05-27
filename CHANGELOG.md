@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.7.0] - TBD
+## [0.6.0] - TBD
 
 ### Added
 - Initial release of Appwrite Rust SDK
@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Health service with 24 methods
 - Locale service with 8 methods
 - Messaging service with 56 methods
+- Organization service with 10 methods
 - Presences service with 5 methods
 - Project service with 98 methods
 - Proxy service with 8 methods
@@ -440,6 +441,19 @@ The Messaging service allows you to send messages to any provider type (SMTP, pu
 
 - `delete_subscriber()` - Delete a subscriber by its unique ID.
 
+#### Organization
+
+- `list_keys()` - Get a list of all API keys from the current organization.
+- `create_key()` - Create a new organization API key.
+- `get_key()` - Get a key by its unique ID. This endpoint returns details about a specific API key in your organization including its scopes.
+- `update_key()` - Update a key by its unique ID. Use this endpoint to update the name, scopes, or expiration time of an API key.
+- `delete_key()` - Delete a key by its unique ID. Once deleted, the key can no longer be used to authenticate API calls.
+- `list_projects()` - Get a list of all projects. You can use the query params to filter your results.
+- `create_project()` - Create a new project.
+- `get_project()` - Get a project.
+- `update_project()` - Update a project by its unique ID.
+- `delete_project()` - Delete a project by its unique ID.
+
 #### Presences
 
 - `list()` - List presence logs. Expired entries are filtered out automatically.
@@ -788,7 +802,7 @@ If the request is successful, a session for the user is automatically created.
 #### Usage
 
 - `list_events()` - Query usage event metrics from the usage database. Returns individual event rows with full metadata. Pass Query objects as JSON strings to filter, paginate, and order results. Supported query methods: equal, greaterThanEqual, lessThanEqual, orderAsc, orderDesc, limit, offset. Supported filter attributes: metric, path, method, status, resource, resourceId, country, userAgent, time (these match the underlying column names — note that the response surfaces `resource` as `resourceType` and `country` as `countryCode`). When no time filter is supplied the endpoint defaults to the last 7 days. Default `limit(100)` is applied if none is given; user-supplied limits are capped at 500. The `total` field is capped at 5000 to keep counts predictable — pass `total=false` to skip the count entirely.
-- `list_gauges()` - Query usage gauge metrics (point-in-time resource snapshots) from the usage database. Returns individual gauge snapshots with metric, value, and timestamp. Pass Query objects as JSON strings to filter, paginate, and order results. Supported query methods: equal, greaterThanEqual, lessThanEqual, orderAsc, orderDesc, limit, offset. Supported filter attributes: metric, time. Use `orderDesc(&quot;time&quot;), limit(1)` to fetch the most recent snapshot. When no time filter is supplied the endpoint defaults to the last 7 days. Default `limit(100)` is applied if none is given; user-supplied limits are capped at 500. The `total` field is capped at 5000 to keep counts predictable — pass `total=false` to skip the count entirely.
+- `list_gauges()` - Query usage gauge metrics (point-in-time resource snapshots) from the usage database. Returns individual gauge snapshots with metric, value, timestamp, resourceType, and resourceId. Pass Query objects as JSON strings to filter, paginate, and order results. Supported query methods: equal, greaterThanEqual, lessThanEqual, orderAsc, orderDesc, limit, offset. Supported filter attributes: metric, time. Use `orderDesc(&quot;time&quot;), limit(1)` to fetch the most recent snapshot. When no time filter is supplied the endpoint defaults to the last 7 days. Default `limit(100)` is applied if none is given; user-supplied limits are capped at 500. The `total` field is capped at 5000 to keep counts predictable — pass `total=false` to skip the count entirely.
 
 #### Users
 The Users service allows you to manage your project users.
@@ -882,6 +896,7 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `RuntimeList` - Runtimes List
 - `DeploymentList` - Deployments List
 - `ExecutionList` - Executions List
+- `ProjectList` - Projects List
 - `WebhookList` - Webhooks List
 - `KeyList` - API Keys List
 - `CountryList` - Countries List
@@ -1074,18 +1089,18 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `Report` - Report
 - `ActivityEvent` - ActivityEvent
 - `BackupArchive` - Archive
-- `BillingLimits` - BillingLimits
+- `BillingLimits` - Limits
 - `Block` - Block
 - `BackupPolicy` - backup
 - `BackupRestoration` - Restoration
 - `UsageEvent` - usageEvent
-- `UsageEventList` - Usage events list
 - `UsageGauge` - usageGauge
-- `UsageGaugeList` - Usage gauges list
 - `ActivityEventList` - Activity event list
 - `BackupArchiveList` - Backup archive list
 - `BackupPolicyList` - Backup policy list
 - `BackupRestorationList` - Backup restoration list
+- `UsageEventList` - Usage events list
+- `UsageGaugeList` - Usage gauges list
 
 ### Dependencies
 - reqwest 0.12+ for HTTP client
@@ -1101,4 +1116,4 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - File upload examples
 - Query builder documentation
 
-[0.7.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.7.0
+[0.6.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.6.0
