@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum RedirectStatusCode {
+pub enum StatusCode {
     #[serde(rename = "301")]
     #[default]
     MovedPermanently,
@@ -13,19 +13,19 @@ pub enum RedirectStatusCode {
     PermanentRedirect,
 }
 
-impl RedirectStatusCode {
+impl StatusCode {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            RedirectStatusCode::MovedPermanently => "301",
-            RedirectStatusCode::Found => "302",
-            RedirectStatusCode::TemporaryRedirect => "307",
-            RedirectStatusCode::PermanentRedirect => "308",
+            StatusCode::MovedPermanently => "301",
+            StatusCode::Found => "302",
+            StatusCode::TemporaryRedirect => "307",
+            StatusCode::PermanentRedirect => "308",
         }
     }
 }
 
-impl std::fmt::Display for RedirectStatusCode {
+impl std::fmt::Display for StatusCode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }

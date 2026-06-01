@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.6.0] - TBD
+## [0.8.0] - TBD
 
 ### Added
 - Initial release of Appwrite Rust SDK
@@ -462,7 +462,7 @@ The Messaging service allows you to send messages to any provider type (SMTP, pu
 
 - `upsert()` - Create or update a presence log by its user ID.
 
-- `update_presence()` - Update a presence log by its unique ID. Using the patch method you can pass only specific fields that will get updated.
+- `update()` - Update a presence log by its unique ID. Using the patch method you can pass only specific fields that will get updated.
 
 - `delete()` - Delete a presence log by its unique ID.
 
@@ -1092,6 +1092,9 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `BillingLimits` - Limits
 - `Block` - Block
 - `BackupPolicy` - backup
+- `PolicyDenyAliasedEmail` - Policy Deny Aliased Email
+- `PolicyDenyDisposableEmail` - Policy Deny Disposable Email
+- `PolicyDenyFreeEmail` - Policy Deny Free Email
 - `BackupRestoration` - Restoration
 - `UsageEvent` - usageEvent
 - `UsageGauge` - usageGauge
@@ -1116,4 +1119,4 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - File upload examples
 - Query builder documentation
 
-[0.6.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.6.0
+[0.8.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.8.0

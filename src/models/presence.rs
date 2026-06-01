@@ -1,7 +1,6 @@
 //! Presence model for Appwrite SDK
 
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 /// Presence
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -34,9 +33,10 @@ pub struct Presence {
     #[serde(rename = "expiresAt")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<String>,
-
-    #[serde(flatten)]
-    pub metadata: HashMap<String, serde_json::Value>,
+    /// Presence metadata.
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub metadata: Option<serde_json::Value>,
 }
 
 impl Presence {
@@ -92,15 +92,17 @@ impl Presence {
         self.expires_at.as_ref()
     }
 
-
-    pub fn get<T: serde::de::DeserializeOwned>(&self, key: &str) -> Option<T> {
-        self.metadata.get(key)
-            .and_then(|v| serde_json::from_value(v.clone()).ok())
+    /// Set metadata
+    pub fn set_metadata(mut self, metadata: serde_json::Value) -> Self {
+        self.metadata = Some(metadata);
+        self
     }
 
-    pub fn metadata(&self) -> &HashMap<String, serde_json::Value> {
-        &self.metadata
+    /// Get metadata
+    pub fn metadata(&self) -> Option<&serde_json::Value> {
+        self.metadata.as_ref()
     }
+
 }
 
 #[cfg(test)]

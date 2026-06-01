@@ -13,7 +13,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let presences = Presences::new(&client);
 
-    let result = presences.update_presence(
+    let result = presences.update(
         "<PRESENCE_ID>",
         "<USER_ID>",
         Some("<STATUS>"), // optional

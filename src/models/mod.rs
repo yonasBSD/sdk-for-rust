@@ -438,6 +438,12 @@ pub mod block;
 pub use block::Block;
 pub mod backup_policy;
 pub use backup_policy::BackupPolicy;
+pub mod policy_deny_aliased_email;
+pub use policy_deny_aliased_email::PolicyDenyAliasedEmail;
+pub mod policy_deny_disposable_email;
+pub use policy_deny_disposable_email::PolicyDenyDisposableEmail;
+pub mod policy_deny_free_email;
+pub use policy_deny_free_email::PolicyDenyFreeEmail;
 pub mod backup_restoration;
 pub use backup_restoration::BackupRestoration;
 pub mod usage_event;
@@ -683,6 +689,9 @@ impl Model for BackupArchive {}
 impl Model for BillingLimits {}
 impl Model for Block {}
 impl Model for BackupPolicy {}
+impl Model for PolicyDenyAliasedEmail {}
+impl Model for PolicyDenyDisposableEmail {}
+impl Model for PolicyDenyFreeEmail {}
 impl Model for BackupRestoration {}
 impl Model for UsageEvent {}
 impl Model for UsageGauge {}

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum SiteAdapter {
+pub enum Adapter {
     #[serde(rename = "static")]
     #[default]
     Static,
@@ -9,17 +9,17 @@ pub enum SiteAdapter {
     Ssr,
 }
 
-impl SiteAdapter {
+impl Adapter {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            SiteAdapter::Static => "static",
-            SiteAdapter::Ssr => "ssr",
+            Adapter::Static => "static",
+            Adapter::Ssr => "ssr",
         }
     }
 }
 
-impl std::fmt::Display for SiteAdapter {
+impl std::fmt::Display for Adapter {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }
