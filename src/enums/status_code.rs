@@ -4,23 +4,23 @@ use serde::{Deserialize, Serialize};
 pub enum StatusCode {
     #[serde(rename = "301")]
     #[default]
-    MovedPermanently301,
+    MovedPermanently,
     #[serde(rename = "302")]
-    Found302,
+    Found,
     #[serde(rename = "307")]
-    TemporaryRedirect307,
+    TemporaryRedirect,
     #[serde(rename = "308")]
-    PermanentRedirect308,
+    PermanentRedirect,
 }
 
 impl StatusCode {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            StatusCode::MovedPermanently301 => "301",
-            StatusCode::Found302 => "302",
-            StatusCode::TemporaryRedirect307 => "307",
-            StatusCode::PermanentRedirect308 => "308",
+            StatusCode::MovedPermanently => "301",
+            StatusCode::Found => "302",
+            StatusCode::TemporaryRedirect => "307",
+            StatusCode::PermanentRedirect => "308",
         }
     }
 }

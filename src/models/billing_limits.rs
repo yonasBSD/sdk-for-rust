@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-/// BillingLimits
+/// Limits
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[cfg_attr(test, derive(Default))]
 pub struct BillingLimits {

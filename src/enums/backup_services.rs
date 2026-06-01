@@ -11,6 +11,8 @@ pub enum BackupServices {
     Documentsdb,
     #[serde(rename = "vectorsdb")]
     Vectorsdb,
+    #[serde(rename = "dedicatedDatabases")]
+    DedicatedDatabases,
     #[serde(rename = "functions")]
     Functions,
     #[serde(rename = "storage")]
@@ -25,6 +27,7 @@ impl BackupServices {
             BackupServices::Tablesdb => "tablesdb",
             BackupServices::Documentsdb => "documentsdb",
             BackupServices::Vectorsdb => "vectorsdb",
+            BackupServices::DedicatedDatabases => "dedicatedDatabases",
             BackupServices::Functions => "functions",
             BackupServices::Storage => "storage",
         }

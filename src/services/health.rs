@@ -201,7 +201,7 @@ impl Health {
     /// Returns the amount of failed jobs in a given queue.
     pub async fn get_failed_jobs(
         &self,
-        name: crate::enums::Name,
+        name: crate::enums::HealthQueueName,
         threshold: Option<i64>,
     ) -> crate::error::Result<crate::models::HealthQueue> {
         let mut params = HashMap::new();

@@ -17,7 +17,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-appwrite = "0.7.0"
+appwrite = "0.8.0"
 tokio = { version = "1.48", features = ["full"] }
 ```
 

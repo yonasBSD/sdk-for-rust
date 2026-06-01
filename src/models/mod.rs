@@ -46,6 +46,8 @@ pub mod deployment_list;
 pub use deployment_list::DeploymentList;
 pub mod execution_list;
 pub use execution_list::ExecutionList;
+pub mod project_list;
+pub use project_list::ProjectList;
 pub mod webhook_list;
 pub use webhook_list::WebhookList;
 pub mod key_list;
@@ -436,16 +438,18 @@ pub mod block;
 pub use block::Block;
 pub mod backup_policy;
 pub use backup_policy::BackupPolicy;
+pub mod policy_deny_aliased_email;
+pub use policy_deny_aliased_email::PolicyDenyAliasedEmail;
+pub mod policy_deny_disposable_email;
+pub use policy_deny_disposable_email::PolicyDenyDisposableEmail;
+pub mod policy_deny_free_email;
+pub use policy_deny_free_email::PolicyDenyFreeEmail;
 pub mod backup_restoration;
 pub use backup_restoration::BackupRestoration;
 pub mod usage_event;
 pub use usage_event::UsageEvent;
-pub mod usage_event_list;
-pub use usage_event_list::UsageEventList;
 pub mod usage_gauge;
 pub use usage_gauge::UsageGauge;
-pub mod usage_gauge_list;
-pub use usage_gauge_list::UsageGaugeList;
 pub mod activity_event_list;
 pub use activity_event_list::ActivityEventList;
 pub mod backup_archive_list;
@@ -454,6 +458,10 @@ pub mod backup_policy_list;
 pub use backup_policy_list::BackupPolicyList;
 pub mod backup_restoration_list;
 pub use backup_restoration_list::BackupRestorationList;
+pub mod usage_event_list;
+pub use usage_event_list::UsageEventList;
+pub mod usage_gauge_list;
+pub use usage_gauge_list::UsageGaugeList;
 
 // Re-export commonly used types
 use serde::{Deserialize, Serialize};
@@ -485,6 +493,7 @@ impl Model for FrameworkList {}
 impl Model for RuntimeList {}
 impl Model for DeploymentList {}
 impl Model for ExecutionList {}
+impl Model for ProjectList {}
 impl Model for WebhookList {}
 impl Model for KeyList {}
 impl Model for CountryList {}
@@ -680,12 +689,15 @@ impl Model for BackupArchive {}
 impl Model for BillingLimits {}
 impl Model for Block {}
 impl Model for BackupPolicy {}
+impl Model for PolicyDenyAliasedEmail {}
+impl Model for PolicyDenyDisposableEmail {}
+impl Model for PolicyDenyFreeEmail {}
 impl Model for BackupRestoration {}
 impl Model for UsageEvent {}
-impl Model for UsageEventList {}
 impl Model for UsageGauge {}
-impl Model for UsageGaugeList {}
 impl Model for ActivityEventList {}
 impl Model for BackupArchiveList {}
 impl Model for BackupPolicyList {}
 impl Model for BackupRestorationList {}
+impl Model for UsageEventList {}
+impl Model for UsageGaugeList {}

@@ -21,6 +21,12 @@ pub enum ProjectPolicyId {
     UserLimit,
     #[serde(rename = "membership-privacy")]
     MembershipPrivacy,
+    #[serde(rename = "deny-aliased-email")]
+    DenyAliasedEmail,
+    #[serde(rename = "deny-disposable-email")]
+    DenyDisposableEmail,
+    #[serde(rename = "deny-free-email")]
+    DenyFreeEmail,
 }
 
 impl ProjectPolicyId {
@@ -36,6 +42,9 @@ impl ProjectPolicyId {
             ProjectPolicyId::SessionLimit => "session-limit",
             ProjectPolicyId::UserLimit => "user-limit",
             ProjectPolicyId::MembershipPrivacy => "membership-privacy",
+            ProjectPolicyId::DenyAliasedEmail => "deny-aliased-email",
+            ProjectPolicyId::DenyDisposableEmail => "deny-disposable-email",
+            ProjectPolicyId::DenyFreeEmail => "deny-free-email",
         }
     }
 }

@@ -89,10 +89,6 @@ pub enum ProjectOAuthProviderId {
     Zoho,
     #[serde(rename = "zoom")]
     Zoom,
-    #[serde(rename = "githubImagine")]
-    GithubImagine,
-    #[serde(rename = "googleImagine")]
-    GoogleImagine,
 }
 
 impl ProjectOAuthProviderId {
@@ -142,8 +138,6 @@ impl ProjectOAuthProviderId {
             ProjectOAuthProviderId::Yandex => "yandex",
             ProjectOAuthProviderId::Zoho => "zoho",
             ProjectOAuthProviderId::Zoom => "zoom",
-            ProjectOAuthProviderId::GithubImagine => "githubImagine",
-            ProjectOAuthProviderId::GoogleImagine => "googleImagine",
         }
     }
 }

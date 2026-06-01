@@ -64,12 +64,14 @@ impl Functions {
         logging: Option<bool>,
         entrypoint: Option<&str>,
         commands: Option<&str>,
-        scopes: Option<Vec<crate::enums::Scopes>>,
+        scopes: Option<Vec<crate::enums::ProjectKeyScopes>>,
         installation_id: Option<&str>,
         provider_repository_id: Option<&str>,
         provider_branch: Option<&str>,
         provider_silent_mode: Option<bool>,
         provider_root_directory: Option<&str>,
+        provider_branches: Option<Vec<String>>,
+        provider_paths: Option<Vec<String>>,
         build_specification: Option<&str>,
         runtime_specification: Option<&str>,
         deployment_retention: Option<i64>,
@@ -119,6 +121,12 @@ impl Functions {
         }
         if let Some(value) = provider_root_directory {
             params.insert("providerRootDirectory".to_string(), json!(value));
+        }
+        if let Some(value) = provider_branches {
+            params.insert("providerBranches".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        }
+        if let Some(value) = provider_paths {
+            params.insert("providerPaths".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
         }
         if let Some(value) = build_specification {
             params.insert("buildSpecification".to_string(), json!(value));
@@ -186,12 +194,14 @@ impl Functions {
         logging: Option<bool>,
         entrypoint: Option<&str>,
         commands: Option<&str>,
-        scopes: Option<Vec<crate::enums::Scopes>>,
+        scopes: Option<Vec<crate::enums::ProjectKeyScopes>>,
         installation_id: Option<&str>,
         provider_repository_id: Option<&str>,
         provider_branch: Option<&str>,
         provider_silent_mode: Option<bool>,
         provider_root_directory: Option<&str>,
+        provider_branches: Option<Vec<String>>,
+        provider_paths: Option<Vec<String>>,
         build_specification: Option<&str>,
         runtime_specification: Option<&str>,
         deployment_retention: Option<i64>,
@@ -242,6 +252,12 @@ impl Functions {
         }
         if let Some(value) = provider_root_directory {
             params.insert("providerRootDirectory".to_string(), json!(value));
+        }
+        if let Some(value) = provider_branches {
+            params.insert("providerBranches".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        }
+        if let Some(value) = provider_paths {
+            params.insert("providerPaths".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
         }
         if let Some(value) = build_specification {
             params.insert("buildSpecification".to_string(), json!(value));

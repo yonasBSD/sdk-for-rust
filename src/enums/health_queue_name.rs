@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Default)]
-pub enum Name {
+pub enum HealthQueueName {
     #[serde(rename = "v1-database")]
     #[default]
     V1Database,
@@ -31,28 +31,28 @@ pub enum Name {
     V1Migrations,
 }
 
-impl Name {
+impl HealthQueueName {
     /// Get the string value of the enum
     pub fn as_str(&self) -> &str {
         match self {
-            Name::V1Database => "v1-database",
-            Name::V1Deletes => "v1-deletes",
-            Name::V1Audits => "v1-audits",
-            Name::V1Mails => "v1-mails",
-            Name::V1Functions => "v1-functions",
-            Name::V1StatsResources => "v1-stats-resources",
-            Name::V1StatsUsage => "v1-stats-usage",
-            Name::V1Webhooks => "v1-webhooks",
-            Name::V1Certificates => "v1-certificates",
-            Name::V1Builds => "v1-builds",
-            Name::V1Screenshots => "v1-screenshots",
-            Name::V1Messaging => "v1-messaging",
-            Name::V1Migrations => "v1-migrations",
+            HealthQueueName::V1Database => "v1-database",
+            HealthQueueName::V1Deletes => "v1-deletes",
+            HealthQueueName::V1Audits => "v1-audits",
+            HealthQueueName::V1Mails => "v1-mails",
+            HealthQueueName::V1Functions => "v1-functions",
+            HealthQueueName::V1StatsResources => "v1-stats-resources",
+            HealthQueueName::V1StatsUsage => "v1-stats-usage",
+            HealthQueueName::V1Webhooks => "v1-webhooks",
+            HealthQueueName::V1Certificates => "v1-certificates",
+            HealthQueueName::V1Builds => "v1-builds",
+            HealthQueueName::V1Screenshots => "v1-screenshots",
+            HealthQueueName::V1Messaging => "v1-messaging",
+            HealthQueueName::V1Migrations => "v1-migrations",
         }
     }
 }
 
-impl std::fmt::Display for Name {
+impl std::fmt::Display for HealthQueueName {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.as_str())
     }
