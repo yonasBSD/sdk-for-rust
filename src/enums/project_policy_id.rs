@@ -7,6 +7,8 @@ pub enum ProjectPolicyId {
     PasswordDictionary,
     #[serde(rename = "password-history")]
     PasswordHistory,
+    #[serde(rename = "password-strength")]
+    PasswordStrength,
     #[serde(rename = "password-personal-data")]
     PasswordPersonalData,
     #[serde(rename = "session-alert")]
@@ -35,6 +37,7 @@ impl ProjectPolicyId {
         match self {
             ProjectPolicyId::PasswordDictionary => "password-dictionary",
             ProjectPolicyId::PasswordHistory => "password-history",
+            ProjectPolicyId::PasswordStrength => "password-strength",
             ProjectPolicyId::PasswordPersonalData => "password-personal-data",
             ProjectPolicyId::SessionAlert => "session-alert",
             ProjectPolicyId::SessionDuration => "session-duration",

@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.8.0] - TBD
+## [0.9.0] - TBD
 
 ### Added
 - Initial release of Appwrite Rust SDK
@@ -29,12 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Databases service with 71 methods
 - Functions service with 26 methods
 - Graphql service with 2 methods
-- Health service with 24 methods
+- Health service with 25 methods
 - Locale service with 8 methods
-- Messaging service with 56 methods
+- Messaging service with 58 methods
 - Organization service with 10 methods
 - Presences service with 5 methods
-- Project service with 98 methods
+- Project service with 100 methods
 - Proxy service with 8 methods
 - Advisor service with 5 methods
 - Sites service with 25 methods
@@ -334,6 +334,8 @@ The GraphQL API allows you to query and mutate your Appwrite server using GraphQ
 The Health service allows you to both validate and monitor your Appwrite server&#039;s health.
 - `get()` - Check the Appwrite HTTP server is up and responsive.
 - `get_antivirus()` - Check the Appwrite Antivirus server is up and connection is successful.
+- `get_audits_db()` - Check the database that backs the audit and activity store. When the connection is reachable the endpoint returns a passing status with its response time.
+
 - `get_cache()` - Check the Appwrite in-memory cache servers are up and connection is successful.
 - `get_certificate()` - Get the SSL certificate for a domain
 - `get_console_pausing()` - Get console pausing health status. Monitors projects approaching the pause threshold to detect potential issues with console access tracking.
@@ -410,6 +412,8 @@ The Messaging service allows you to send messages to any provider type (SMTP, pu
 - `update_resend_provider()` - Update a Resend provider by its unique ID.
 - `create_sendgrid_provider()` - Create a new Sendgrid provider.
 - `update_sendgrid_provider()` - Update a Sendgrid provider by its unique ID.
+- `create_ses_provider()` - Create a new Amazon SES provider.
+- `update_ses_provider()` - Update an Amazon SES provider by its unique ID.
 - `create_smtp_provider()` - Create a new SMTP provider.
 - `create_smtp_provider()` - Create a new SMTP provider.
 - `update_smtp_provider()` - Update a SMTP provider by its unique ID.
@@ -489,6 +493,7 @@ You can also create a standard API key if you need a longer-lived key instead.
 - `update_mock_phone()` - Update a mock phone by its unique number. Use this endpoint to update the mock phone&#039;s OTP.
 - `delete_mock_phone()` - Delete a mock phone by its unique number. This endpoint removes the mock phone and its OTP configuration from the project.
 - `list_o_auth2_providers()` - Get a list of all OAuth2 providers supported by the server, along with the project&#039;s configuration for each. Credential fields are write-only and always returned empty.
+- `update_o_auth2_server()` - Update the OAuth2 server (OIDC provider) configuration.
 - `update_o_auth2_amazon()` - Update the project OAuth2 Amazon configuration.
 - `update_o_auth2_apple()` - Update the project OAuth2 Apple configuration.
 - `update_o_auth2_auth0()` - Update the project OAuth2 Auth0 configuration.
@@ -555,6 +560,7 @@ You can also create a standard API key if you need a longer-lived key instead.
 
 Keep in mind, while password history policy is disabled, the history is not being stored. Enabling the policy will not have any history on existing users, and it will only start to collect and enforce the policy on password changes since the policy is enabled.
 - `update_password_personal_data_policy()` - Updating this policy allows you to control if password strength is checked against personal data. When enabled, and user sets or changes their password, the password must not contain user ID, name, email or phone number.
+- `update_password_strength_policy()` - Update the password strength requirements for users in the project.
 - `update_session_alert_policy()` - Updating this policy allows you to control if email alert is sent upon session creation. When enabled, and user signs into their account, they will be sent an email notification. There is an exception, the first session after a new sign up does not trigger an alert, even if the policy is enabled.
 - `update_session_duration_policy()` - Update maximum duration how long sessions created within a project should stay active for.
 - `update_session_invalidation_policy()` - Updating this policy allows you to control if existing sessions should be invalidated when a password of a user is changed. When enabled, and user changes their password, they will be logged out of all their devices.
@@ -1046,6 +1052,7 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - `OAuth2ProviderList` - OAuth2 Providers List
 - `PolicyPasswordDictionary` - Policy Password Dictionary
 - `PolicyPasswordHistory` - Policy Password History
+- `PolicyPasswordStrength` - Policy Password Strength
 - `PolicyPasswordPersonalData` - Policy Password Personal Data
 - `PolicySessionAlert` - Policy Session Alert
 - `PolicySessionDuration` - Policy Session Duration
@@ -1119,4 +1126,4 @@ If you want to generate a token for a custom authentication flow, use the [POST 
 - File upload examples
 - Query builder documentation
 
-[0.8.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.8.0
+[0.9.0]: https://github.com/appwrite/sdk-for-rust/releases/tag/0.9.0

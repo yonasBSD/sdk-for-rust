@@ -44,6 +44,19 @@ impl Health {
         self.client.call(Method::GET, &path, None, Some(params)).await
     }
 
+    /// Check the database that backs the audit and activity store. When the
+    /// connection is reachable the endpoint returns a passing status with its
+    /// response time.
+    pub async fn get_audits_db(
+        &self,
+    ) -> crate::error::Result<crate::models::HealthStatusList> {
+        let params = HashMap::new();
+
+        let path = "/health/audits-db".to_string();
+
+        self.client.call(Method::GET, &path, None, Some(params)).await
+    }
+
     /// Check the Appwrite in-memory cache servers are up and connection is
     /// successful.
     pub async fn get_cache(

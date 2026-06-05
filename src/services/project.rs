@@ -300,6 +300,48 @@ impl Project {
         self.client.call(Method::GET, &path, None, Some(params)).await
     }
 
+    /// Update the OAuth2 server (OIDC provider) configuration.
+    #[allow(clippy::too_many_arguments)]
+    pub async fn update_o_auth2_server(
+        &self,
+        enabled: bool,
+        authorization_url: impl Into<String>,
+        scopes: Option<Vec<String>>,
+        access_token_duration: Option<i64>,
+        refresh_token_duration: Option<i64>,
+        public_access_token_duration: Option<i64>,
+        public_refresh_token_duration: Option<i64>,
+        confidential_pkce: Option<bool>,
+    ) -> crate::error::Result<crate::models::Project> {
+        let mut params = HashMap::new();
+        params.insert("enabled".to_string(), json!(enabled));
+        params.insert("authorizationUrl".to_string(), json!(authorization_url.into()));
+        if let Some(value) = scopes {
+            params.insert("scopes".to_string(), json!(value.into_iter().map(|s| s.into()).collect::<Vec<String>>()));
+        }
+        if let Some(value) = access_token_duration {
+            params.insert("accessTokenDuration".to_string(), json!(value));
+        }
+        if let Some(value) = refresh_token_duration {
+            params.insert("refreshTokenDuration".to_string(), json!(value));
+        }
+        if let Some(value) = public_access_token_duration {
+            params.insert("publicAccessTokenDuration".to_string(), json!(value));
+        }
+        if let Some(value) = public_refresh_token_duration {
+            params.insert("publicRefreshTokenDuration".to_string(), json!(value));
+        }
+        if let Some(value) = confidential_pkce {
+            params.insert("confidentialPkce".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/oauth2-server".to_string();
+
+        self.client.call(Method::PUT, &path, Some(api_headers), Some(params)).await
+    }
+
     /// Update the project OAuth2 Amazon configuration.
     pub async fn update_o_auth2_amazon(
         &self,
@@ -1834,6 +1876,39 @@ impl Project {
         api_headers.insert("content-type".to_string(), "application/json".to_string());
 
         let path = "/project/policies/password-personal-data".to_string();
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update the password strength requirements for users in the project.
+    pub async fn update_password_strength_policy(
+        &self,
+        min: Option<i64>,
+        uppercase: Option<bool>,
+        lowercase: Option<bool>,
+        number: Option<bool>,
+        symbols: Option<bool>,
+    ) -> crate::error::Result<crate::models::PolicyPasswordStrength> {
+        let mut params = HashMap::new();
+        if let Some(value) = min {
+            params.insert("min".to_string(), json!(value));
+        }
+        if let Some(value) = uppercase {
+            params.insert("uppercase".to_string(), json!(value));
+        }
+        if let Some(value) = lowercase {
+            params.insert("lowercase".to_string(), json!(value));
+        }
+        if let Some(value) = number {
+            params.insert("number".to_string(), json!(value));
+        }
+        if let Some(value) = symbols {
+            params.insert("symbols".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/project/policies/password-strength".to_string();
 
         self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
     }

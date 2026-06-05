@@ -346,6 +346,8 @@ pub mod policy_password_dictionary;
 pub use policy_password_dictionary::PolicyPasswordDictionary;
 pub mod policy_password_history;
 pub use policy_password_history::PolicyPasswordHistory;
+pub mod policy_password_strength;
+pub use policy_password_strength::PolicyPasswordStrength;
 pub mod policy_password_personal_data;
 pub use policy_password_personal_data::PolicyPasswordPersonalData;
 pub mod policy_session_alert;
@@ -643,6 +645,7 @@ impl Model for OAuth2Microsoft {}
 impl Model for OAuth2ProviderList {}
 impl Model for PolicyPasswordDictionary {}
 impl Model for PolicyPasswordHistory {}
+impl Model for PolicyPasswordStrength {}
 impl Model for PolicyPasswordPersonalData {}
 impl Model for PolicySessionAlert {}
 impl Model for PolicySessionDuration {}

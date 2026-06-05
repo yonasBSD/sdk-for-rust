@@ -21,6 +21,9 @@ pub struct Project {
     /// Project team ID.
     #[serde(rename = "teamId")]
     pub team_id: String,
+    /// Project region
+    #[serde(rename = "region")]
+    pub region: String,
     /// Deprecated since 1.9.5: List of dev keys.
     #[serde(rename = "devKeys")]
     pub dev_keys: Vec<crate::models::DevKey>,
@@ -76,13 +79,6 @@ pub struct Project {
     /// List of protocols.
     #[serde(rename = "protocols")]
     pub protocols: Vec<crate::models::ProjectProtocol>,
-    /// Project region
-    #[serde(rename = "region")]
-    pub region: String,
-    /// Billing limits reached
-    #[serde(rename = "billingLimits")]
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub billing_limits: Option<crate::models::BillingLimits>,
     /// Project blocks information
     #[serde(rename = "blocks")]
     pub blocks: Vec<crate::models::Block>,
@@ -90,6 +86,41 @@ pub struct Project {
     /// projectInactivityDays to determine if project is paused.
     #[serde(rename = "consoleAccessedAt")]
     pub console_accessed_at: String,
+    /// Billing limits reached
+    #[serde(rename = "billingLimits")]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub billing_limits: Option<crate::models::BillingLimits>,
+    /// OAuth2 server status
+    #[serde(rename = "oAuth2ServerEnabled")]
+    pub o_auth2_server_enabled: bool,
+    /// OAuth2 server authorization URL
+    #[serde(rename = "oAuth2ServerAuthorizationUrl")]
+    pub o_auth2_server_authorization_url: String,
+    /// OAuth2 server allowed scopes
+    #[serde(rename = "oAuth2ServerScopes")]
+    pub o_auth2_server_scopes: Vec<String>,
+    /// OAuth2 server access token duration in seconds for confidential clients
+    #[serde(rename = "oAuth2ServerAccessTokenDuration")]
+    pub o_auth2_server_access_token_duration: i64,
+    /// OAuth2 server refresh token duration in seconds for confidential clients
+    #[serde(rename = "oAuth2ServerRefreshTokenDuration")]
+    pub o_auth2_server_refresh_token_duration: i64,
+    /// OAuth2 server access token duration in seconds for public clients (SPAs,
+    /// mobile, native)
+    #[serde(rename = "oAuth2ServerPublicAccessTokenDuration")]
+    pub o_auth2_server_public_access_token_duration: i64,
+    /// OAuth2 server refresh token duration in seconds for public clients (SPAs,
+    /// mobile, native)
+    #[serde(rename = "oAuth2ServerPublicRefreshTokenDuration")]
+    pub o_auth2_server_public_refresh_token_duration: i64,
+    /// When enabled, PKCE is required for confidential clients (server-side flows
+    /// using client_secret). PKCE is always required for public clients regardless
+    /// of this setting.
+    #[serde(rename = "oAuth2ServerConfidentialPkce")]
+    pub o_auth2_server_confidential_pkce: bool,
+    /// OAuth2 server discovery URL
+    #[serde(rename = "oAuth2ServerDiscoveryUrl")]
+    pub o_auth2_server_discovery_url: String,
 }
 
 impl Project {
@@ -116,6 +147,11 @@ impl Project {
     /// Get team_id
     pub fn team_id(&self) -> &String {
         &self.team_id
+    }
+
+    /// Get region
+    pub fn region(&self) -> &String {
+        &self.region
     }
 
     /// Get dev_keys
@@ -208,9 +244,14 @@ impl Project {
         &self.protocols
     }
 
-    /// Get region
-    pub fn region(&self) -> &String {
-        &self.region
+    /// Get blocks
+    pub fn blocks(&self) -> &Vec<crate::models::Block> {
+        &self.blocks
+    }
+
+    /// Get console_accessed_at
+    pub fn console_accessed_at(&self) -> &String {
+        &self.console_accessed_at
     }
 
     /// Set billing_limits
@@ -224,14 +265,49 @@ impl Project {
         self.billing_limits.as_ref()
     }
 
-    /// Get blocks
-    pub fn blocks(&self) -> &Vec<crate::models::Block> {
-        &self.blocks
+    /// Get o_auth2_server_enabled
+    pub fn o_auth2_server_enabled(&self) -> &bool {
+        &self.o_auth2_server_enabled
     }
 
-    /// Get console_accessed_at
-    pub fn console_accessed_at(&self) -> &String {
-        &self.console_accessed_at
+    /// Get o_auth2_server_authorization_url
+    pub fn o_auth2_server_authorization_url(&self) -> &String {
+        &self.o_auth2_server_authorization_url
+    }
+
+    /// Get o_auth2_server_scopes
+    pub fn o_auth2_server_scopes(&self) -> &Vec<String> {
+        &self.o_auth2_server_scopes
+    }
+
+    /// Get o_auth2_server_access_token_duration
+    pub fn o_auth2_server_access_token_duration(&self) -> &i64 {
+        &self.o_auth2_server_access_token_duration
+    }
+
+    /// Get o_auth2_server_refresh_token_duration
+    pub fn o_auth2_server_refresh_token_duration(&self) -> &i64 {
+        &self.o_auth2_server_refresh_token_duration
+    }
+
+    /// Get o_auth2_server_public_access_token_duration
+    pub fn o_auth2_server_public_access_token_duration(&self) -> &i64 {
+        &self.o_auth2_server_public_access_token_duration
+    }
+
+    /// Get o_auth2_server_public_refresh_token_duration
+    pub fn o_auth2_server_public_refresh_token_duration(&self) -> &i64 {
+        &self.o_auth2_server_public_refresh_token_duration
+    }
+
+    /// Get o_auth2_server_confidential_pkce
+    pub fn o_auth2_server_confidential_pkce(&self) -> &bool {
+        &self.o_auth2_server_confidential_pkce
+    }
+
+    /// Get o_auth2_server_discovery_url
+    pub fn o_auth2_server_discovery_url(&self) -> &String {
+        &self.o_auth2_server_discovery_url
     }
 
 }
@@ -248,6 +324,7 @@ mod tests {
         let _ = _model.updated_at();
         let _ = _model.name();
         let _ = _model.team_id();
+        let _ = _model.region();
         let _ = _model.dev_keys();
         let _ = _model.smtp_enabled();
         let _ = _model.smtp_sender_name();
@@ -266,9 +343,17 @@ mod tests {
         let _ = _model.auth_methods();
         let _ = _model.services();
         let _ = _model.protocols();
-        let _ = _model.region();
         let _ = _model.blocks();
         let _ = _model.console_accessed_at();
+        let _ = _model.o_auth2_server_enabled();
+        let _ = _model.o_auth2_server_authorization_url();
+        let _ = _model.o_auth2_server_scopes();
+        let _ = _model.o_auth2_server_access_token_duration();
+        let _ = _model.o_auth2_server_refresh_token_duration();
+        let _ = _model.o_auth2_server_public_access_token_duration();
+        let _ = _model.o_auth2_server_public_refresh_token_duration();
+        let _ = _model.o_auth2_server_confidential_pkce();
+        let _ = _model.o_auth2_server_discovery_url();
     }
 
     #[test]
