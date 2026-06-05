@@ -189,6 +189,10 @@ pub enum ProjectKeyScopes {
     DomainsWrite,
     #[serde(rename = "events.read")]
     EventsRead,
+    #[serde(rename = "apps.read")]
+    AppsRead,
+    #[serde(rename = "apps.write")]
+    AppsWrite,
     #[serde(rename = "usage.read")]
     UsageRead,
 }
@@ -290,6 +294,8 @@ impl ProjectKeyScopes {
             ProjectKeyScopes::DomainsRead => "domains.read",
             ProjectKeyScopes::DomainsWrite => "domains.write",
             ProjectKeyScopes::EventsRead => "events.read",
+            ProjectKeyScopes::AppsRead => "apps.read",
+            ProjectKeyScopes::AppsWrite => "apps.write",
             ProjectKeyScopes::UsageRead => "usage.read",
         }
     }

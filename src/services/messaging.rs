@@ -982,6 +982,107 @@ impl Messaging {
         self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
     }
 
+    /// Create a new Amazon SES provider.
+    #[allow(clippy::too_many_arguments)]
+    pub async fn create_ses_provider(
+        &self,
+        provider_id: impl Into<String>,
+        name: impl Into<String>,
+        access_key: Option<&str>,
+        secret_key: Option<&str>,
+        region: Option<&str>,
+        from_name: Option<&str>,
+        from_email: Option<&str>,
+        reply_to_name: Option<&str>,
+        reply_to_email: Option<&str>,
+        enabled: Option<bool>,
+    ) -> crate::error::Result<crate::models::Provider> {
+        let mut params = HashMap::new();
+        params.insert("providerId".to_string(), json!(provider_id.into()));
+        params.insert("name".to_string(), json!(name.into()));
+        if let Some(value) = access_key {
+            params.insert("accessKey".to_string(), json!(value));
+        }
+        if let Some(value) = secret_key {
+            params.insert("secretKey".to_string(), json!(value));
+        }
+        if let Some(value) = region {
+            params.insert("region".to_string(), json!(value));
+        }
+        if let Some(value) = from_name {
+            params.insert("fromName".to_string(), json!(value));
+        }
+        if let Some(value) = from_email {
+            params.insert("fromEmail".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_name {
+            params.insert("replyToName".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_email {
+            params.insert("replyToEmail".to_string(), json!(value));
+        }
+        if let Some(value) = enabled {
+            params.insert("enabled".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/messaging/providers/ses".to_string();
+
+        self.client.call(Method::POST, &path, Some(api_headers), Some(params)).await
+    }
+
+    /// Update an Amazon SES provider by its unique ID.
+    #[allow(clippy::too_many_arguments)]
+    pub async fn update_ses_provider(
+        &self,
+        provider_id: impl Into<String>,
+        name: Option<&str>,
+        enabled: Option<bool>,
+        access_key: Option<&str>,
+        secret_key: Option<&str>,
+        region: Option<&str>,
+        from_name: Option<&str>,
+        from_email: Option<&str>,
+        reply_to_name: Option<&str>,
+        reply_to_email: Option<&str>,
+    ) -> crate::error::Result<crate::models::Provider> {
+        let mut params = HashMap::new();
+        if let Some(value) = name {
+            params.insert("name".to_string(), json!(value));
+        }
+        if let Some(value) = enabled {
+            params.insert("enabled".to_string(), json!(value));
+        }
+        if let Some(value) = access_key {
+            params.insert("accessKey".to_string(), json!(value));
+        }
+        if let Some(value) = secret_key {
+            params.insert("secretKey".to_string(), json!(value));
+        }
+        if let Some(value) = region {
+            params.insert("region".to_string(), json!(value));
+        }
+        if let Some(value) = from_name {
+            params.insert("fromName".to_string(), json!(value));
+        }
+        if let Some(value) = from_email {
+            params.insert("fromEmail".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_name {
+            params.insert("replyToName".to_string(), json!(value));
+        }
+        if let Some(value) = reply_to_email {
+            params.insert("replyToEmail".to_string(), json!(value));
+        }
+        let mut api_headers = HashMap::new();
+        api_headers.insert("content-type".to_string(), "application/json".to_string());
+
+        let path = "/messaging/providers/ses/{providerId}".to_string().replace("{providerId}", &provider_id.into().to_string());
+
+        self.client.call(Method::PATCH, &path, Some(api_headers), Some(params)).await
+    }
+
     /// Create a new SMTP provider.
     #[allow(clippy::too_many_arguments)]
     pub async fn create_smtp_provider(
